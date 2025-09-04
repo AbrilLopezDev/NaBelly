@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  @apply font-sans;
+}
+
+button {
+  background-color:"yellow-custom";
+  color: black;             
+  border: none;               
+  padding: 0.5rem 1rem;      
+  border-radius: 0.5rem;      
+  cursor: pointer;           
+  font-weight: bold;          
+  transition: background-color 0.3s; 
+  appearance: none;
+}
+
+button:hover {
+  background-color: #f8cc6d; /* un tono un poco más oscuro al pasar el mouse */
+}
