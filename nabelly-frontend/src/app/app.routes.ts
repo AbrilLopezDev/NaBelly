@@ -3,6 +3,8 @@ import { AuthLayout } from './layouts/auth-layout/auth-layout';
 import { MainLayout } from './layouts/main-layout/main-layout';
 import { AuthLogin } from './pages/auth-login/auth-login';
 import { UsuarioInicio } from './pages/usuario-inicio/usuario-inicio';
+import { AuthSignUp } from './pages/auth-sign-up/auth-sign-up'; 
+import { AuthRecovery } from './pages/auth-recovery/auth-recovery';
 
 export const routes: Routes = [
   {
@@ -10,7 +12,9 @@ export const routes: Routes = [
     component: AuthLayout,
     children: [
       { path: 'login', component: AuthLogin },
-      // otras rutas de auth si las hubiera
+      { path: 'signup', component: AuthSignUp },
+      { path: 'recovery', component: AuthRecovery },
+      
     ]
   },
   {

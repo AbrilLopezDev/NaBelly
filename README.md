@@ -1,4 +1,4 @@
-# NaBelly
+# NaBelly 🥨
 
 ## Stack
 
@@ -15,3 +15,11 @@
 - **Angular:** 20.2.3
 - **TypeScript:** 5.9.2
 - **Tailwind CSS:** 3.3.3
+
+# 📸 Algunas imágenes del proyecto
+
+<div style="text-align: center;">
+  <img src="./images/Login.png" alt="Foto 1" width="46%" style="margin-right:5%; margin-bottom:10px;" />
+  <img src="./images/SignUp.png" alt="Foto 2" width="46%" style="margin-bottom:10px;" />
+</div>
+

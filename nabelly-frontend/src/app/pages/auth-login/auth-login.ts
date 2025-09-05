@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth-service';
 import { FormsModule } from '@angular/forms'; // para ngModel
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router'; // necesario para redirecciones
 
 @Component({
   selector: 'app-auth-login',
   standalone: true, 
-  imports: [FormsModule], // necesario para [(ngModel)]
+  imports: [FormsModule, RouterLink], // necesario para [(ngModel)]
   templateUrl: './auth-login.html',
   styleUrls: ['./auth-login.css']
 })
