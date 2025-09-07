@@ -12,6 +12,18 @@ interface LoginResponse {
   role: string;  // tipo de usuario
 }
 
+interface SignupRequest{
+  foto: File | null;
+  username: string;
+  password: string;
+  email: string;
+}
+
+interface SignupResponse {
+  token: string; 
+  role: string;  
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,4 +36,17 @@ export class AuthService {
   login(data: LoginRequest): Observable<LoginResponse> { //necesita lo del login request, espera recibir lo del login response 
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data);
   }
+
+  signup(data: SignupRequest): Observable<SignupResponse> { //formdata porque hay un file, no se puede convertir a json
+  const formData = new FormData();
+
+  if (data.foto) {
+    formData.append("foto", data.foto);
+  }
+  formData.append("username", data.username);
+  formData.append("password", data.password);
+  formData.append("email", data.email);
+
+  return this.http.post<SignupResponse>(`${this.apiUrl}/signup`, formData);
+}
 }
