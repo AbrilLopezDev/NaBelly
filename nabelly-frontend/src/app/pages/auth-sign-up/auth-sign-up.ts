@@ -64,9 +64,6 @@ export class AuthSignUp {
 
     if (this.password !== this.confPassword) { console.error("Las contraseñas no coinciden"); return; }
 
-    // Si no subió foto, asignar la predeterminada
-    const fotoAEnviar = this.foto ?? new File([], 'assets/user.png');
-
     this.authService.signup({foto: this.foto, username: this.username,password: this.password,email: this.email})
     .subscribe({
         next: (res) => { 
@@ -78,12 +75,16 @@ export class AuthSignUp {
 
         },
         error: (err) => {
-          if (err.status === 404) {
+          if (err.status === 409) {
           alert('Usuario ya existe');
+          } else if (err.status === 422) {
+          alert('Error al guardar usuario en la base de datos');
+          } else if (err.status === 500) {
+          alert('Error al guardar la foto en el servidor');
           } else {
           alert('Error inesperado');
+          }
         }
-      }
     });
   }
 

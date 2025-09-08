@@ -18,4 +18,16 @@ public class AuthServiceImpl implements AuthService{
         Optional <Usuario> usuario = usuarioRepository.findBynombreusuario(username);
         return usuario.orElse(null); // si esta presente devuelve el Usuario, si no null
     }
+
+    @Override
+    public Boolean crearUsuario(Usuario usuario) {
+        try{
+            usuarioRepository.save(usuario);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
 }

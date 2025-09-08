@@ -25,6 +25,18 @@ public class Usuario {
     @Column(name = "estado", nullable = false)
     private boolean estado;
 
+    public Usuario(String nombreusuario, String contasena, String email, String foto, boolean estado, boolean tipo) {
+        this.nombreusuario = nombreusuario;
+        this.contasena = contasena;
+        this.email = email;
+        this.foto = foto;
+        this.estado = estado;
+        this.tipo = tipo;
+    }
+
+    public Usuario() {
+    }
+
     public String getNombreusuario() {
         return nombreusuario;
     }
