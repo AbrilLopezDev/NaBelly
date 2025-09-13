@@ -1,9 +1,13 @@
 <nav class="bg-pink-custom shadow-md h-20 md:h-24 w-full relative px-4">
   <div class="w-full md:w-[60%] h-full mx-auto flex items-center justify-between relative">
 
-    <!-- IZQUIERDA Menu  -->
-    <button (click)="toggleMenu()" class="p-2">
-      <i class="fas fa-bars text-red-custom text-5xl"></i>
+    
+    <button  
+      (click)="toggleMenu()" 
+      [class.pointer-events-none]="animating"  
+      class="p-2 relative z-50 no-hover"
+      > <!-- evitar animaciones durante apertura y cierre del menú -->
+      <i class="fas fa-bars text-red-custom text-5xl"></i> 
     </button>
 
   
@@ -13,12 +17,12 @@
 
    
     <div class="flex items-center gap-4">
-      <!-- Lupa -->
+      
       <button class="p-2">
         <i class="fas fa-search text-red-custom text-4xl"></i>
       </button>
 
-      <!-- Foto perfil -->
+      
       <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden cursor-pointer border-2 border-red-custom">
         <img
           src="assets/user.png"
@@ -27,23 +31,92 @@
         />
       </div>
 
-      <!-- Corazon -->
+      
       <button class="p-2">
         <i class="fas fa-heart text-red-custom text-4xl"></i>
       </button>
-    </div>
-  </div>
+    </div> 
 
-  <!-- MENU LATERAL -->
-  <div
-    *ngIf="isMenuOpen"
-    class="absolute top-20 left-0 w-64 h-screen bg-white shadow-lg p-4 z-50 transition-all duration-300"
-  >
-    <p class="text-gray-700 font-semibold">Menú</p>
-    <ul class="mt-4 space-y-2">
-      <li class="hover:text-pink-500 cursor-pointer">Inicio</li>
-      <li class="hover:text-pink-500 cursor-pointer">Explorar</li>
-      <li class="hover:text-pink-500 cursor-pointer">Configuración</li>
-    </ul>
   </div>
 </nav>
+
+<!-- MENÚ LATERAL -->
+<aside 
+  class="fixed top-0 left-0 w-64 h-full bg-pink-custom text-white shadow-lg transform transition-transform duration-300 z-40"
+  [class.-translate-x-full]="!menuOpen"
+  >
+  <div class="p-6">
+
+    <ul class="space-y-4 text-lg font-semibold">
+
+      <li>
+        <button class="flex justify-between items-center w-full" (click)="toggleRecetas()">
+          Recetas
+          <i class="fas fa-chevron-down transition-transform duration-200" [class.rotate-180]="recetasOpen"></i>
+        </button>
+        <ul *ngIf="recetasOpen" class="ml-4 mt-2 flex flex-col space-y-2">
+          <li>
+            <button class="flex justify-between items-center w-full" (click)="toggleDulces()">
+              Dulces
+              <i class="fas fa-chevron-down transition-transform duration-200" [class.rotate-180]="dulcesOpen"></i>
+            </button>
+            <ul *ngIf="dulcesOpen" class="ml-4 mt-1 flex flex-col space-y-1">
+              <li>Tartas Dulces</li>
+              <li>Postres</li>
+              <li>Bizcochuelos</li>
+              <li>Galletas</li>
+              <li>Helados</li>
+              <li>Mufins</li>
+            </ul>
+          </li>
+          <li>
+            <button class="flex justify-between items-center w-full" (click)="toggleSaladas()">
+              Saladas
+              <i class="fas fa-chevron-down transition-transform duration-200" [class.rotate-180]="saladasOpen"></i>
+            </button>
+            <ul *ngIf="saladasOpen" class="ml-4 mt-1 flex flex-col space-y-1">
+              <li>Ensaladas</li>
+              <li>Sopas</li>
+              <li>Tartas Saladas</li>
+              <li>Pastas</li>
+              <li>Carnes</li>
+              <li>Arroces</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <!-- Otras secciones como botones -->
+      <li>
+        <button>
+          Desayunos
+        </button>
+      </li>
+      <li>
+        <button>
+          Almuerzos
+        </button>
+      </li>
+      <li>
+        <button>
+          Meriendas
+        </button>
+      </li>
+      <li>
+        <button>
+          Cenas
+        </button>
+      </li>
+
+    </ul>
+  </div>
+</aside>
+
+<!-- Fondo semitransparente -->
+<div 
+  class="fixed inset-0 bg-black bg-opacity-50 z-30" 
+  *ngIf="menuOpen" 
+  (click)="toggleMenu()">
+</div>
+
+    
+
