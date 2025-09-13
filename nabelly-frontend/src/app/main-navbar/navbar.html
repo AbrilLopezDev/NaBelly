@@ -1,7 +1,49 @@
-<nav class="bg-pink-custom shadow-md h-20 md:h-24 w-full relative">
+<nav class="bg-pink-custom shadow-md h-20 md:h-24 w-full relative px-4">
   <div class="w-full md:w-[60%] h-full mx-auto flex items-center justify-between relative">
+
+    <!-- IZQUIERDA Menu  -->
+    <button (click)="toggleMenu()" class="p-2">
+      <i class="fas fa-bars text-red-custom text-5xl"></i>
+    </button>
+
+  
     <div class="absolute inset-0 flex items-center justify-center">
-      <img src="assets/logo.png" alt="Logo" class="h-20 md:h-36">
+      <img src="assets/logo.png" alt="Logo" class="h-20 md:h-36" />
     </div>
+
+   
+    <div class="flex items-center gap-4">
+      <!-- Lupa -->
+      <button class="p-2">
+        <i class="fas fa-search text-red-custom text-4xl"></i>
+      </button>
+
+      <!-- Foto perfil -->
+      <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden cursor-pointer border-2 border-red-custom">
+        <img
+          src="assets/user.png"
+          alt="Perfil"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Corazon -->
+      <button class="p-2">
+        <i class="fas fa-heart text-red-custom text-4xl"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- MENU LATERAL -->
+  <div
+    *ngIf="isMenuOpen"
+    class="absolute top-20 left-0 w-64 h-screen bg-white shadow-lg p-4 z-50 transition-all duration-300"
+  >
+    <p class="text-gray-700 font-semibold">Menú</p>
+    <ul class="mt-4 space-y-2">
+      <li class="hover:text-pink-500 cursor-pointer">Inicio</li>
+      <li class="hover:text-pink-500 cursor-pointer">Explorar</li>
+      <li class="hover:text-pink-500 cursor-pointer">Configuración</li>
+    </ul>
   </div>
 </nav>
