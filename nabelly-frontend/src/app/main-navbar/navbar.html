@@ -25,10 +25,10 @@
       
       <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden cursor-pointer border-2 border-red-custom">
         <img
-          src="assets/user.png"
+          [src]="usuario?.foto || 'assets/user.png'" 
           alt="Perfil"
           class="w-full h-full object-cover"
-        />
+         />
       </div>
 
       

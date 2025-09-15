@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {  HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-auth-sign-up',
@@ -55,37 +56,49 @@ export class AuthSignUp {
     this.step = 1;
   }
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private userService:UserService, private router: Router) {
 
   }
 
 
   onSubmit() {
 
-    if (this.password !== this.confPassword) { console.error("Las contraseñas no coinciden"); return; }
+    if (this.password !== this.confPassword) { 
+    console.error("Las contraseñas no coinciden"); 
+    return; 
+  }
 
-    this.authService.signup({foto: this.foto, username: this.username,password: this.password,email: this.email})
-    .subscribe({
-        next: (res) => { 
-          console.log('JWT recibido:', res.token);
-          
-          sessionStorage.setItem('token', res.token);
+  this.authService.signup({
+    foto: this.foto, 
+    username: this.username,
+    password: this.password,
+    email: this.email
+  })
+  .subscribe({
+    next: (res) => { 
+      // Guardar token
+      sessionStorage.setItem('token', res.token);
+      sessionStorage.setItem('role', res.role);
 
-          this.router.navigate(['/inicio']);
+      // Cargar datos completos del usuario
+      this.userService.loadUserData().subscribe(user => {
+        this.userService.setUser(user); // guardar usuario completo en BehaviorSubject y sesión
+        this.router.navigate(['/inicio']);
+      });
 
-        },
-        error: (err) => {
-          if (err.status === 409) {
-          alert('Usuario ya existe');
-          } else if (err.status === 422) {
-          alert('Error al guardar usuario en la base de datos');
-          } else if (err.status === 500) {
-          alert('Error al guardar la foto en el servidor');
-          } else {
-          alert('Error inesperado');
-          }
-        }
-    });
+    },
+    error: (err) => {
+      if (err.status === 409) {
+        alert('Usuario ya existe');
+      } else if (err.status === 422) {
+        alert('Error al guardar usuario en la base de datos');
+      } else if (err.status === 500) {
+        alert('Error al guardar la foto en el servidor');
+      } else {
+        alert('Error inesperado');
+      }
+    }
+  });
   }
 
 }

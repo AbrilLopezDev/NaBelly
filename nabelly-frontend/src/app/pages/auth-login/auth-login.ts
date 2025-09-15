@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth-service';
 import { FormsModule } from '@angular/forms'; // para ngModel
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router'; // necesario para redirecciones
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-auth-login',
@@ -15,30 +16,36 @@ export class AuthLogin {
   username: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router ) { }
+  constructor(private authService: AuthService, private userService: UserService, private router: Router ) { }
 
 
   onSubmit() {
     this.authService.login({ username: this.username, password: this.password })
-    //this para acceder a propiedad de la clase
-      .subscribe({
-        next: (res) => { //respuesta llega correctamente
-          console.log('JWT recibido:', res.token);
-          // Guardar token en localStorage/sessionStorage
-          sessionStorage.setItem('token', res.token);
+    .subscribe({
+      next: (res) => {
+        // Guardar token y rol
+        sessionStorage.setItem('token', res.token);
+        sessionStorage.setItem('role', res.role);
 
+        
+        this.userService.loadUserData().subscribe(user => {
+          this.userService.setUser(user); // guardaR usuario completo en BehaviorSubject y sesión
+
+          
           this.router.navigate(['/inicio']);
+        });
 
-        },
-        error: (err) => {
-          if (err.status === 404) {
+      },
+      error: (err) => {
+        if (err.status === 404) {
           alert('Usuario no existe');
-          } else if (err.status === 401) {
+        } else if (err.status === 401) {
           alert('Contraseña incorrecta');
-          } else {
+        } else {
           alert('Error inesperado');
         }
       }
     });
+
   }
 }

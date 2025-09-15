@@ -24,12 +24,14 @@ interface SignupResponse {
   role: string;  
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   private apiUrl = 'http://localhost:8080/api/auth'; // endpoint de login en Spring
+  private tokenKey = 'token';
 
   constructor(private http: HttpClient) { }
 
@@ -49,4 +51,20 @@ export class AuthService {
 
   return this.http.post<SignupResponse>(`${this.apiUrl}/signup`, formData);
 }
+etToken(token: string) {
+    sessionStorage.setItem(this.tokenKey, token);
+  }
+
+  getToken(): string | null {
+    return sessionStorage.getItem(this.tokenKey);
+  }
+
+  clearToken() {
+    sessionStorage.removeItem(this.tokenKey);
+  }
+
+  
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
 }

@@ -12,23 +12,20 @@ import java.util.UUID;
 
 @Service
 public class FileStorageService {
-    private final String uploadDir = "uploads/fotos/";
+    private final String uploadDir = "uploads/";
 
     public String guardarFoto(MultipartFile foto) throws IOException {
         if (foto == null || foto.isEmpty()) {
             return null;
         }
-        String fileName = UUID.randomUUID().toString() + "_" + foto.getOriginalFilename();
 
-        // Ruta completa
+        String fileName = UUID.randomUUID().toString() + "_" + foto.getOriginalFilename();
         Path path = Paths.get(uploadDir + fileName);
 
-        // Crear carpeta si no existe
         Files.createDirectories(path.getParent());
-
-        // Guardar el archivo en disco
         Files.copy(foto.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-        return "/uploads/fotos/" + fileName;
+        String baseUrl = "http://localhost:8080/uploads/"; // URL pública
+        return "/uploads/" + fileName;
     }
 }

@@ -58,17 +58,21 @@ public class authController {
         String email = request.getEmail();
         String fotoUrl;
 
+
+        String baseUrl = "http://localhost:8080/uploads/";
+
         // Verificar si se subió un archivo
         if (request.getFoto() != null && !request.getFoto().isEmpty()) {
             try {
-                fotoUrl = fileStorageService.guardarFoto(request.getFoto());
+                String nombreArchivo = fileStorageService.guardarFoto(request.getFoto());
+                fotoUrl = "http://localhost:8080" + nombreArchivo;
             } catch (IOException e) {
                 e.printStackTrace();
-                return ResponseEntity.status(500).body(null); // error al guardar la foto
+                return ResponseEntity.status(500).body(null);
             }
         } else {
-            // Si no hay archivo
-            fotoUrl = "uploads/fotos/user.png";
+            // Usuario sin foto → usar imagen por defecto
+            fotoUrl = baseUrl + "user.png";
         }
 
         Usuario usuario = authService.usuarioExiste(username);

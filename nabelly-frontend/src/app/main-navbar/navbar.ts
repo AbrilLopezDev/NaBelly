@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
+import { UserService, Usuario } from '../services/user-service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,16 @@ export class Navbar {
   dulcesOpen = false;
   saladasOpen = false;
   animating = false;
+  usuario: Usuario | null = null; 
 
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    //actualizar la foto automáticamente
+    this.userService.user$.subscribe(user => {
+      this.usuario = user;
+    });
+  }
 
   toggleMenu() {
     this.animating = true;
