@@ -1,5 +1,6 @@
 package com.nabelly.nabelly_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,8 +15,8 @@ public class HoraReceta {
     @Column(name = "nombre", length = 50, nullable = false)
     private String nombre;
 
-    // Relación con Categorias (opcional, para facilitar consultas)
     @OneToMany(mappedBy = "horaReceta")
+    @JsonManagedReference
     private List<Categoria> categorias;
 
     // Getters y Setters

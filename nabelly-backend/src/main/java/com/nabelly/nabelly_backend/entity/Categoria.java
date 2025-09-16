@@ -1,5 +1,6 @@
 package com.nabelly.nabelly_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,14 +16,15 @@ public class Categoria {
 
     // Relación ManyToOne con TipoReceta
     @ManyToOne
-    @JoinColumn(name = "codtiporeceta", nullable = false,
-            foreignKey = @ForeignKey(name = "fk_categorias_tiporeceta"))
+    @JoinColumn(name = "codtiporeceta")
+    @JsonBackReference
     private TipoReceta tipoReceta;
 
     // Relación ManyToOne con HoraReceta
     @ManyToOne
     @JoinColumn(name = "codhorareceta", nullable = false,
             foreignKey = @ForeignKey(name = "fk_categorias_horareceta"))
+    @JsonBackReference
     private HoraReceta horaReceta;
 
     // Getters y Setters

@@ -1,5 +1,7 @@
 package com.nabelly.nabelly_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,8 +16,8 @@ public class TipoReceta {
     @Column(name = "nombre", length = 12, nullable = false)
     private String nombre;
 
-    // Relación con Categorias (opcional)
     @OneToMany(mappedBy = "tipoReceta")
+    @JsonManagedReference
     private List<Categoria> categorias;
 
     // Getters y Setters
