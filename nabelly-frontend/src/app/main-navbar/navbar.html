@@ -2,59 +2,66 @@
   <div class="w-full md:w-[60%] h-full mx-auto flex items-center justify-between relative">
 
     
-    <button  
-      (click)="toggleMenu()" 
-      [class.pointer-events-none]="animating"  
-      class="p-2 relative z-50 no-hover"
-      > <!-- evitar animaciones durante apertura y cierre del menú -->
-      <i class="fas fa-bars text-red-custom text-5xl"></i> 
+    
+    <button
+      type="button"
+      (pointerdown)="toggleMenu()"
+      class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2"
+      aria-label="Abrir menú"
+    >
+      <i class="fas fa-bars text-red-custom text-5xl"></i>
     </button>
 
-  
-    <div class="absolute inset-0 flex items-center justify-center">
+    <!-- Logo centrado -->
+    <div class="absolute inset-0 flex items-center justify-center z-10">
       <a [routerLink]="'/inicio'">
         <img src="assets/logo.png" alt="Logo" class="h-20 md:h-36" />
       </a>
     </div>
 
-   
-    <div class="flex items-center gap-4">
-      
+    <!-- Iconos derecha -->
+    <div class="flex items-center gap-4 ml-auto">
       <button class="p-2">
         <i class="fas fa-search text-red-custom text-4xl"></i>
       </button>
 
-      
-      <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden cursor-pointer border-2 border-red-custom">
+      <!-- Foto de perfil: ocultar en móvil -->
+      <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden cursor-pointer border-2 border-red-custom hidden md:block">
         <a [routerLink]="'/perfil'">
           <img
-            [src]="usuario?.foto || 'assets/user.png'" 
+            [src]="usuario?.foto || 'assets/user.png'"
             alt="Perfil"
             class="w-full h-full object-cover"
           />
         </a>
       </div>
 
-      
-      <button class="p-2">
+      <!-- Icono favoritos: ocultar en móvil -->
+      <button class="p-2 hidden md:block">
         <a [routerLink]="'/favoritos'">
           <i class="fas fa-heart text-red-custom text-4xl"></i>
         </a>
       </button>
-    </div> 
+    </div>
 
   </div>
 </nav>
 
 <!-- MENÚ LATERAL -->
-<aside 
-  class="fixed top-0 left-0 w-64 h-full bg-pink-custom text-white shadow-lg transform transition-transform duration-300 z-40"
+<aside
+  class="fixed top-0 left-0 w-64 h-full bg-pink-custom text-white shadow-lg transform transition-transform duration-300 z-30"
   [class.-translate-x-full]="!menuOpen"
-  >
+>
   <div class="p-6">
 
-    <ul class="space-y-4 text-lg font-semibold">
+    <!-- Botón cerrar (pointerdown para respuesta rápida) -->
+    <div class="flex justify-end">
+      <button type="button" (pointerdown)="onTogglePointer($event)" (click)="toggleMenu()" class="p-2" aria-label="Cerrar menú">
+        <i class="fas fa-times text-3xl text-red-custom"></i>
+      </button>
+    </div>
 
+    <ul class="space-y-4 text-lg font-semibold">
       <li>
         <button class="flex justify-between items-center w-full" (click)="toggleRecetas()">
           Recetas
@@ -67,7 +74,7 @@
               <i class="fas fa-chevron-down transition-transform duration-200" [class.rotate-180]="dulcesOpen"></i>
             </button>
             <ul *ngIf="dulcesOpen" class="ml-4 mt-1 flex flex-col space-y-1">
-            <li class="text-red-custom" *ngFor="let cat of dulces">{{ cat.nombre }}</li>
+              <li class="text-red-custom" *ngFor="let cat of dulces">{{ cat.nombre }}</li>
             </ul>
           </li>
           <li>
@@ -76,42 +83,24 @@
               <i class="fas fa-chevron-down transition-transform duration-200" [class.rotate-180]="saladasOpen"></i>
             </button>
             <ul *ngIf="saladasOpen" class="ml-4 mt-1 flex flex-col space-y-1">
-            <li class="text-red-custom" *ngFor="let cat of saladas">{{ cat.nombre }}</li>
+              <li class="text-red-custom" *ngFor="let cat of saladas">{{ cat.nombre }}</li>
             </ul>
           </li>
         </ul>
       </li>
-      <li>
-        <button>
-          Desayunos
-        </button>
-      </li>
-      <li>
-        <button>
-          Almuerzos
-        </button>
-      </li>
-      <li>
-        <button>
-          Meriendas
-        </button>
-      </li>
-      <li>
-        <button>
-          Cenas
-        </button>
-      </li>
 
+      <li><button>Mi perfil</button></li>
+      <li><button>Favoritos</button></li>
     </ul>
   </div>
 </aside>
 
 <!-- Fondo semitransparente -->
-<div 
-  class="fixed inset-0 bg-black bg-opacity-50 z-30" 
-  *ngIf="menuOpen" 
-  (click)="toggleMenu()">
-</div>
+<div
+  class="fixed inset-0 bg-black bg-opacity-50 z-25"
+  *ngIf="menuOpen"
+  (pointerdown)="toggleMenu()"
+></div>
 
     
 

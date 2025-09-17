@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { UserService, Usuario } from '../services/user-service';
 import { CategoriaService, Categoria } from '../services/categoria-service';
-import { RouterModule } from '@angular/router';  
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,16 +10,15 @@ import { RouterModule } from '@angular/router';
   templateUrl: './navbar.html',
   imports: [CommonModule, NgIf, NgFor, RouterModule],
   styleUrls: ['./navbar.css']
-  
 })
 export class Navbar {
-
   menuOpen = false;
   recetasOpen = false;
   dulcesOpen = false;
   saladasOpen = false;
-  animating = false;
-  usuario: Usuario | null = null; 
+  animating = false; // evitar dobles pulsaciones
+  userMenuOpen = false;
+  usuario: Usuario | null = null;
 
   dulces: Categoria[] = [];
   saladas: Categoria[] = [];
@@ -27,35 +26,39 @@ export class Navbar {
   constructor(private userService: UserService, private categoriaService: CategoriaService) {}
 
   ngOnInit() {
-    //actualizar la foto automáticamente
     this.userService.user$.subscribe(user => {
       this.usuario = user;
     });
 
-    //Busco las categorias
     this.categoriaService.getCategoriasPorTipo('D').subscribe(data => {
-    this.dulces = data;
-    });
- 
-    this.categoriaService.getCategoriasPorTipo('S').subscribe(data => {
-    this.saladas = data;
+      this.dulces = data;
     });
 
+    this.categoriaService.getCategoriasPorTipo('S').subscribe(data => {
+      this.saladas = data;
+    });
   }
 
+
   toggleMenu() {
+    if (this.animating) return;
     this.animating = true;
     this.menuOpen = !this.menuOpen;
 
-    // Duración de la animación = 300ms
+    // mantener bloqueado solo mientras corre la animación
     setTimeout(() => {
       this.animating = false;
-    }, 300);
+    }, 350); 
+  }
+  
+ 
+  onTogglePointer(ev: Event) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    this.toggleMenu();
   }
 
   toggleRecetas() { this.recetasOpen = !this.recetasOpen; }
   toggleDulces() { this.dulcesOpen = !this.dulcesOpen; }
   toggleSaladas() { this.saladasOpen = !this.saladasOpen; }
-
-
 }

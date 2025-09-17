@@ -43,7 +43,7 @@
             </div>
 
           <!-- Botón Siguiente -->
-          <button type="button" class="bg-yellow-custom mt-4 px-6 py-2 rounded-md" (click)="nextStep()">Siguiente</button>
+          <button type="button" class="bg-yellow-custom mt-4 px-6 py-2 rounded-md hoverbtn" (click)="nextStep()">Siguiente</button>
         </div>
 
         <div *ngIf="step === 2" class="w-full flex flex-col items-center">
@@ -70,8 +70,8 @@
 
           <!-- Botones navegación -->
           <div class="flex justify-between w-[82%] md:w-[60%] mt-4">
-            <button type="button" class="bg-yellow-custom px-6 py-2 rounded-md" (click)="prevStep()">Anterior</button>
-            <button type="submit" class="bg-yellow-custom px-6 py-2 rounded-md">Registrar</button>
+            <button type="button" class="bg-yellow-custom px-6 py-2 rounded-md hoverbtn" (click)="prevStep()">Anterior</button>
+            <button type="submit" class="bg-yellow-custom px-6 py-2 rounded-md hoverbtn">Registrar</button>
           </div>
         </div>
       

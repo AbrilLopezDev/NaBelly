@@ -19,10 +19,6 @@ button {
   appearance: none;
 }
 
-button:hover {
-  background-color: #f8cc6d; /* un tono un poco más oscuro al pasar el mouse */
-}
-
-button.no-hover:hover {
-  all: unset; /* elimina cualquier efecto de hover */
+.hoverbtn:hover {
+  background-color: #f8cc6d; /* un tono un poco más oscuro */
 }
