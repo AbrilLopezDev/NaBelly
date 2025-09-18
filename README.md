@@ -22,5 +22,7 @@
   <img src="./images/Login.png" alt="Foto 1" width="46%" style="margin-right:5%; margin-bottom:10px;" />
   <img src="./images/SignUp.png" alt="Foto 2" width="46%" style="margin-bottom:10px;" />
   <img src="./images/SignUp2.png" alt="Foto 3" width="46%" style="margin-bottom:10px;" />
+  <img src="./images/InicioNav.png" alt="Foto 4" width="46%" style="margin-bottom:10px;" />
+  <img src="./images/MenuLateral.png" alt="Foto 5" width="46%" style="margin-bottom:10px;" />
 </div>
 

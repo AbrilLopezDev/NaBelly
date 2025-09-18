@@ -1,4 +1,4 @@
-<nav class="bg-pink-custom shadow-md h-20 md:h-24 w-full relative px-4">
+<nav class="bg-pink-custom shadow-md h-20 md:h-22 w-full relative px-4">
   <div class="w-full md:w-[60%] h-full mx-auto flex items-center justify-between relative">
 
     
@@ -6,40 +6,71 @@
     <button
       type="button"
       (pointerdown)="toggleMenu()"
-      class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2"
+      class="mt-2 absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2"
       aria-label="Abrir menú"
     >
-      <i class="fas fa-bars text-red-custom text-5xl"></i>
+      <i class="fas fa-bars text-red-custom text-2xl md:text-4xl"></i>
     </button>
 
     <!-- Logo centrado -->
     <div class="absolute inset-0 flex items-center justify-center z-10">
       <a [routerLink]="'/inicio'">
-        <img src="assets/logo.png" alt="Logo" class="h-20 md:h-36" />
+        <img src="assets/logo.png" alt="Logo" class="h-20 md:h-32" />
       </a>
     </div>
 
     <!-- Iconos derecha -->
     <div class="flex items-center gap-4 ml-auto">
-      <button class="p-2">
-        <i class="fas fa-search text-red-custom text-4xl"></i>
+      
+      <button class="p-2 cursor-pointer z-20" (click)="toggleSearch()">
+        <i class="fas fa-search text-red-custom text-2xl md:text-3xl"></i>
       </button>
 
-      <!-- Foto de perfil: ocultar en móvil -->
-      <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden cursor-pointer border-2 border-red-custom hidden md:block">
-        <a [routerLink]="'/perfil'">
+      <!-- buscador debajo del logo -->
+      <div
+        *ngIf="searchOpen"
+        class="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-64 md:w-96 bg-light-yellow-custom rounded-full shadow-lg z-[110]"
+      >
+        <input
+          type="text"
+          placeholder="Buscar..."
+          class="w-full px-4 py-2 rounded-full focus:outline-none bg-light-yellow-custom border-2 border-red-custom"
+        />
+      </div>
+      
+      <div class="relative hidden md:block z-40">
+        <div
+          class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden cursor-pointer border-2 border-red-custom"
+          (click)="toggleUserMiniMenu()"
+        >
           <img
             [src]="usuario?.foto || 'assets/user.png'"
             alt="Perfil"
             class="w-full h-full object-cover"
           />
-        </a>
+        </div>
+
+        <!-- Menu usuario desplegable -->
+        <div
+          *ngIf="miniUserMenuOpen"
+          class="absolute right-0 mt-4 w-40 translate-x-16 bg-light-yellow-custom text-black rounded-lg shadow-lg py-2 z-50"
+        >
+
+          <div class="px-4 py-2 text-gray-700 font-semibold border-b border-red-custom">
+            ¡Hola, {{ usuario?.username }}!
+          </div>
+
+          <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom">Mi perfil</button>
+          <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom">Favoritos</button>
+          <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom">Mis recetas</button>
+          <button class="block w-full text-left px-4 py-2 text-red-custom hover:bg-yellow-custom">Cerrar sesión</button>
+        </div>
       </div>
 
-      <!-- Icono favoritos: ocultar en móvil -->
+      
       <button class="p-2 hidden md:block">
         <a [routerLink]="'/favoritos'">
-          <i class="fas fa-heart text-red-custom text-4xl"></i>
+          <i class="fas fa-heart text-red-custom text-3xl"></i>
         </a>
       </button>
     </div>
@@ -49,12 +80,12 @@
 
 <!-- MENÚ LATERAL -->
 <aside
-  class="fixed top-0 left-0 w-64 h-full bg-pink-custom text-white shadow-lg transform transition-transform duration-300 z-30"
+  class="fixed top-0 left-0 w-64 h-full bg-pink-custom text-white shadow-lg transform transition-transform duration-300 z-[100]"
   [class.-translate-x-full]="!menuOpen"
 >
   <div class="p-6">
 
-    <!-- Botón cerrar (pointerdown para respuesta rápida) -->
+    <!-- (pointerdown para respuesta rápida) -->
     <div class="flex justify-end">
       <button type="button" (pointerdown)="onTogglePointer($event)" (click)="toggleMenu()" class="p-2" aria-label="Cerrar menú">
         <i class="fas fa-times text-3xl text-red-custom"></i>
@@ -89,7 +120,18 @@
         </ul>
       </li>
 
-      <li><button>Mi perfil</button></li>
+      <li>
+        <button class="flex justify-between items-center w-full" (click)="togglePerfil()">
+          Perfil
+          <i class="fas fa-chevron-down transition-transform duration-200" 
+          [class.rotate-180]="perfilOpen"></i>
+        </button>
+        <ul *ngIf="perfilOpen" class="ml-4 mt-2 flex flex-col space-y-2">
+          <li><button class="text-red-custom" >Mi perfil</button></li>
+          <li><button class="text-red-custom" >Mis recetas</button></li>
+          <li><button class="text-red-custom" >Cerrar sesión</button></li>
+        </ul>
+      </li>
       <li><button>Favoritos</button></li>
     </ul>
   </div>
@@ -97,7 +139,7 @@
 
 <!-- Fondo semitransparente -->
 <div
-  class="fixed inset-0 bg-black bg-opacity-50 z-25"
+  class="fixed inset-0 bg-black bg-opacity-50 z-[90]"
   *ngIf="menuOpen"
   (pointerdown)="toggleMenu()"
 ></div>

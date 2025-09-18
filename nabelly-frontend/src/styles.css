@@ -22,3 +22,14 @@ button {
 .hoverbtn:hover {
   background-color: #f8cc6d; /* un tono un poco más oscuro */
 }
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

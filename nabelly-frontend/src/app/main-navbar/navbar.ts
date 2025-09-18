@@ -18,6 +18,9 @@ export class Navbar {
   saladasOpen = false;
   animating = false; // evitar dobles pulsaciones
   userMenuOpen = false;
+  miniUserMenuOpen = false;
+  perfilOpen = false;
+  searchOpen = false;
   usuario: Usuario | null = null;
 
   dulces: Categoria[] = [];
@@ -61,4 +64,8 @@ export class Navbar {
   toggleRecetas() { this.recetasOpen = !this.recetasOpen; }
   toggleDulces() { this.dulcesOpen = !this.dulcesOpen; }
   toggleSaladas() { this.saladasOpen = !this.saladasOpen; }
+  togglePerfil() { this.perfilOpen = !this.perfilOpen; }
+  toggleUserMiniMenu() { this.miniUserMenuOpen = !this.miniUserMenuOpen; }
+  toggleSearch() { this.searchOpen = !this.searchOpen; }
+
 }
