@@ -1,6 +1,7 @@
 package com.nabelly.nabelly_backend.controller;
 
 import com.nabelly.nabelly_backend.entity.Categoria;
+import com.nabelly.nabelly_backend.entity.Receta;
 import com.nabelly.nabelly_backend.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,17 @@ public class CategoriaController {
 
 
         return ResponseEntity.ok(categorias);
+    }
+
+    @GetMapping("/codigo/{codCategoria}")
+    public ResponseEntity<Categoria> CategoriasXCodCategoria (@PathVariable String codCategoria){
+        Categoria categoria = categoriaService.CategoriaXCodCategoria(codCategoria);
+
+        if (categoria==null) {
+            return ResponseEntity.status(204).body(null);
+        }
+
+        return ResponseEntity.ok(categoria);
     }
 
 }

@@ -21,6 +21,10 @@ export class CategoriaService {
     getCategoriasPorTipo(idtipo: string): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(`${this.apiUrl}/tipo/${idtipo}`);
     }
+
+    getCategoriaPorCodCategoria(codCategoria: String): Observable<Categoria>{
+      return this.http.get<Categoria>(`${this.apiUrl}/codigo/${codCategoria}`)
+    }
     
 
 

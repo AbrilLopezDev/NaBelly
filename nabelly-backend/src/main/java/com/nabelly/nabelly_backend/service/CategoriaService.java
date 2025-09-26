@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CategoriaService {
     List<Categoria> CategoriaXTipoReceta (String idTipoReceta);
+    Categoria CategoriaXCodCategoria(String codCategoria);
 }

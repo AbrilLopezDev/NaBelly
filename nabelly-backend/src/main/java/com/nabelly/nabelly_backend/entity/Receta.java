@@ -29,7 +29,7 @@ public class Receta {
     private String ingredientes;
 
     @Column(name = "porciones", length = 30)
-    private String porciones;
+    private int porciones;
 
     @ManyToOne
     @JoinColumn(name = "codcategoria", referencedColumnName = "codcategoria")
@@ -91,11 +91,11 @@ public class Receta {
         this.ingredientes = ingredientes;
     }
 
-    public String getPorciones() {
+    public int getPorciones() {
         return porciones;
     }
 
-    public void setPorciones(String porciones) {
+    public void setPorciones(int porciones) {
         this.porciones = porciones;
     }
 

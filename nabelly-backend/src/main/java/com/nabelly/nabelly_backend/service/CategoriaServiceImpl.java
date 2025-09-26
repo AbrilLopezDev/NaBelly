@@ -20,4 +20,11 @@ public class CategoriaServiceImpl implements CategoriaService {
 
         return categoriaRepository.findByTipoRecetaCodTipoReceta(idTipoReceta);
     }
+
+    @Override
+    public Categoria CategoriaXCodCategoria(String codCategoria) {
+        return categoriaRepository.findByCodCategoria(codCategoria);
+    }
+
+
 }

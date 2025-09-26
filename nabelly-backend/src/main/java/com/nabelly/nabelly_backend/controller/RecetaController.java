@@ -20,4 +20,6 @@ public class RecetaController {
         List<Receta> recetas = recetaService.RecetasXCategoria(codCategoria);
         return ResponseEntity.ok(recetas);
     }
+
+
 }

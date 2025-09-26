@@ -5,6 +5,7 @@ import { AuthLogin } from './pages/auth-login/auth-login';
 import { UsuarioInicio } from './pages/usuario-inicio/usuario-inicio';
 import { AuthSignUp } from './pages/auth-sign-up/auth-sign-up'; 
 import { AuthRecovery } from './pages/auth-recovery/auth-recovery';
+import { UsuarioListadoCategoria } from './pages/usuario-listado-categoria/usuario-listado-categoria';
 
 export const routes: Routes = [
   {
@@ -22,7 +23,7 @@ export const routes: Routes = [
     component: MainLayout,
     children: [
       { path: 'inicio', component: UsuarioInicio },
-      // otras rutas de la app principal
+      { path: 'usuario-listado-categoria/:codCategoria', component: UsuarioListadoCategoria },     
     ]
   }
 ];
