@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/usuario")
 @CrossOrigin(origins = "http://localhost:4200")
-public class userController {
+public class UserController {
 
     @Autowired
     AuthService authService;

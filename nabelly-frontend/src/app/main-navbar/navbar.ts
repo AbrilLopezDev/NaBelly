@@ -2,7 +2,15 @@ import { Component } from '@angular/core';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { UserService, Usuario } from '../services/user-service';
 import { CategoriaService, Categoria } from '../services/categoria-service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { UsuarioListadoCategoria } from '../pages/usuario-listado-categoria/usuario-listado-categoria';
+import { UsuarioInicio } from '../pages/usuario-inicio/usuario-inicio';
+
+
+const routes: Routes = [
+  { path: 'inicio', component: UsuarioInicio },
+  { path: 'usuario-listado-categoria/:codcategoria', component: UsuarioListadoCategoria }
+];
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +20,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./navbar.css']
 })
 export class Navbar {
+
   menuOpen = false;
   recetasOpen = false;
   dulcesOpen = false;
@@ -38,6 +47,7 @@ export class Navbar {
     });
 
     this.categoriaService.getCategoriasPorTipo('S').subscribe(data => {
+      console.log(data);
       this.saladas = data;
     });
   }

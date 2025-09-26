@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/categorias")
 @CrossOrigin(origins = "http://localhost:4200")
-public class categoriaController {
+public class CategoriaController {
 
     @Autowired
     CategoriaService categoriaService;
@@ -23,7 +23,7 @@ public class categoriaController {
 
         if (categorias.isEmpty()) {
             System.out.println("Vacia");
-            return ResponseEntity.status(204).body(null); //no categorias cargadas
+            return ResponseEntity.status(204).body(null);
         }
 
 

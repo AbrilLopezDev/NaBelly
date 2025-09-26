@@ -105,7 +105,15 @@
               <i class="fas fa-chevron-down transition-transform duration-200" [class.rotate-180]="dulcesOpen"></i>
             </button>
             <ul *ngIf="dulcesOpen" class="ml-4 mt-1 flex flex-col space-y-1">
-              <li class="text-red-custom" *ngFor="let cat of dulces">{{ cat.nombre }}</li>
+              <li *ngFor="let cat of dulces">
+                <a 
+                  [routerLink]="['/usuario-listado-categoria', cat.codCategoria]" 
+                  class="text-red-custom cursor-pointer block px-2 py-1 hover:bg-yellow-custom rounded"
+                  (click)="toggleMenu()"
+                >
+                  {{ cat.nombre }}
+                </a>
+              </li>
             </ul>
           </li>
           <li>
@@ -114,7 +122,15 @@
               <i class="fas fa-chevron-down transition-transform duration-200" [class.rotate-180]="saladasOpen"></i>
             </button>
             <ul *ngIf="saladasOpen" class="ml-4 mt-1 flex flex-col space-y-1">
-              <li class="text-red-custom" *ngFor="let cat of saladas">{{ cat.nombre }}</li>
+              <li *ngFor="let cat of saladas">
+                <a 
+                  [routerLink]="['/usuario-listado-categoria', cat.codCategoria]" 
+                  class="text-red-custom cursor-pointer block px-2 py-1 hover:bg-yellow-custom rounded"
+                  (click)="toggleMenu()"
+                >
+                  {{ cat.nombre }}
+                </a>
+              </li>
             </ul>
           </li>
         </ul>

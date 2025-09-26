@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RecetaRepository extends JpaRepository<Receta, Integer> {
-    List<Receta> findByCategoria_CodCategoria(String codCategoria);
+    List<Receta> findByCategoriaCodCategoria(String codCategoria);
 }

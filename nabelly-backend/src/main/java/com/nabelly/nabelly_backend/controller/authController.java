@@ -19,7 +19,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "http://localhost:4200")
-public class authController {
+public class AuthController {
 
     @Autowired
     private AuthService authService;

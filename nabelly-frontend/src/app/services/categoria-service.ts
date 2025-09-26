@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 
 export interface Categoria {
-    codcategoria: String,
+    codCategoria: String,
     nombre: String,
     codtiporeceta: String,
     codhorareceta: String,
