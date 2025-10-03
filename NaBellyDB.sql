@@ -46,6 +46,7 @@ porciones int,
 codcategoria char(3),
 hora DATETIME,
 foto varchar(500) null,
+favoritos int null,
 constraint pk_recetas primary key (idreceta),
 constraint fk_recetas_categorias foreign key (codcategoria) references categorias (codcategoria),
 constraint fk_recetas_usuarios foreign key (nombreusuario) references usuarios (nombreusuario)
@@ -81,137 +82,139 @@ INSERT INTO categorias (codcategoria, nombre, codtiporeceta, codhorareceta) VALU
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- DESPUES DE CORRER EL BACK POR PRIMERA VEZ
 
+use nabelly;
 -- BUDINES
-INSERT INTO recetas (nombreusuario, nombre, descripcion, pasos, ingredientes, porciones, codcategoria, hora, foto) VALUES
-('usuario', 'Budín de Arándano', 'Fácil budín con pocos ingredientes y un delicioso toque de arándanos frescos', 
-'1. Precalentar el horno a 180°C. Engrasar un molde para budín y reservar. 
-2. Tamizar la harina junto con el polvo de hornear y la sal en un bol grande. Reservar. 
-3. Batir la manteca con el azúcar hasta obtener una mezcla cremosa. 
-4. Incorporar los huevos uno a uno, batiendo bien después de cada adición. 
-5. Añadir la esencia de vainilla y mezclar suavemente. 
-6. Agregar los ingredientes secos tamizados alternando con la leche, mezclando con cuidado. 
-7. Integrar los arándanos con movimientos envolventes para no romperlos. 
-8. Verter la mezcla en el molde y alisar la superficie. 
-9. Hornear 45-55 minutos o hasta que al insertar un palillo este salga limpio. 
-10. Dejar enfriar 10 minutos en el molde antes de desmoldar. 
-11. Servir tibio o a temperatura ambiente.', 
-'Harina, huevos, arándanos, azúcar, manteca, leche, polvo de hornear, sal, esencia de vainilla', 
-'8 porciones', 'BUD', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/budinArandano.png'),
+INSERT INTO recetas (nombreusuario, nombre, descripcion, pasos, ingredientes, porciones, codcategoria, hora, foto, favoritos) VALUES
+('usuario', 'Budín de Arándano', 'Este budín de arándano es fácil y delicioso, con una textura esponjosa y un sabor fresco gracias a los arándanos. Mezcla manteca cremosa con azúcar, incorpora huevos y combina los ingredientes secos con leche. Ideal para desayunos o meriendas, se puede servir tibio o a temperatura ambiente, acompañando café o té.', 
+'1. Precalentar el horno a 180°C y engrasar un molde para budín. 
+2. Tamizar 250 g de harina, 10 g de polvo de hornear y 2 g de sal en un bol grande. 
+3. Batir 100 g de manteca con 150 g de azúcar hasta obtener una mezcla cremosa. 
+4. Agregar 3 huevos uno a uno, batiendo bien cada vez. 
+5. Añadir 5 ml de esencia de vainilla y mezclar suavemente. 
+6. Incorporar los ingredientes secos alternando con 120 ml de leche, mezclando con cuidado. 
+7. Integrar 150 g de arándanos con movimientos envolventes. 
+8. Verter la mezcla en el molde, alisar y hornear 45-55 minutos hasta que al insertar un palillo este salga limpio. 
+9. Dejar enfriar 10 minutos antes de desmoldar y servir.', 
+'250 g harina, 3 huevos, 150 g arándanos, 150 g azúcar, 100 g manteca, 120 ml leche, 10 g polvo de hornear, 2 g sal, 5 ml esencia de vainilla', 
+8, 'BUD', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/budinArandano.png', 0),
 
-('usuario', 'Budín de Banana', 'Rápido y fácil budín con sabor intenso a banana, húmedo y delicioso', 
-'1. Precalentar el horno a 175°C. Engrasar un molde para budín. 
-2. Aplastar las bananas maduras hasta obtener un puré. 
-3. Batir manteca con azúcar hasta cremosa. Agregar huevos uno a uno. 
-4. Incorporar el puré de banana y la esencia de vainilla. 
-5. Mezclar la harina, el bicarbonato y la sal, y agregar a la preparación húmeda. 
-6. Verter en el molde y alisar. 
-7. Hornear 50-60 minutos o hasta que el palillo salga limpio. 
+('usuario', 'Budín de Banana', 'Rápido y fácil de preparar, este budín de banana tiene un sabor intenso y húmedo que encanta a todos. La mezcla de bananas maduras con manteca, azúcar y huevos da como resultado un postre esponjoso y aromático. Perfecto para meriendas, desayunos o acompañar café, se disfruta solo o con un toque de mermelada.', 
+'1. Precalentar el horno a 175°C y engrasar un molde para budín. 
+2. Aplastar 3 bananas maduras hasta obtener un puré. 
+3. Batir 100 g de manteca con 150 g de azúcar hasta cremosa y añadir 3 huevos uno a uno. 
+4. Incorporar el puré de banana y 5 ml de esencia de vainilla. 
+5. Mezclar 250 g de harina con 5 g de bicarbonato y 2 g de sal, e integrar a la mezcla húmeda. 
+6. Verter en el molde y alisar la superficie. 
+7. Hornear 50-60 minutos hasta que un palillo salga limpio. 
 8. Dejar enfriar 10 minutos antes de desmoldar. 
-9. Servir y disfrutar con manteca o mermelada.', 
-'Harina, huevos, bananas maduras, manteca, azúcar, bicarbonato, sal, esencia de vainilla', 
-'8 porciones', 'BUD', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/budinBanana.png'),
+9. Servir solo o acompañado de manteca o mermelada.', 
+'250 g harina, 3 huevos, 3 bananas maduras, 100 g manteca, 150 g azúcar, 5 g bicarbonato, 2 g sal, 5 ml esencia de vainilla', 
+8, 'BUD', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/budinBanana.png', 0),
 
-('usuario', 'Budín de Chocolate', 'Delicioso budín de chocolate, intenso, fácil y rápido de preparar', 
-'1. Precalentar el horno a 180°C. Engrasar el molde. 
-2. Derretir chocolate con manteca a baño maría. 
-3. Batir huevos con azúcar hasta cremosos. 
+('usuario', 'Budín de Chocolate', 'Delicioso budín de chocolate, intenso, fácil y rápido de preparar. Ideal para amantes del chocolate, combina manteca y chocolate derretido con huevos batidos, azúcar y harina tamizada. Su textura es húmeda y esponjosa, perfecta para meriendas, desayunos o postres acompañando un café o un vaso de leche.', 
+'1. Precalentar el horno a 180°C y engrasar el molde. 
+2. Derretir 150 g de chocolate con 100 g de manteca a baño maría. 
+3. Batir 3 huevos con 150 g de azúcar hasta cremosos. 
 4. Incorporar el chocolate derretido y mezclar suavemente. 
-5. Agregar harina tamizada con polvo de hornear y mezclar hasta integrar. 
-6. Verter en el molde y alisar. 
+5. Agregar 250 g de harina tamizada con 10 g de polvo de hornear, mezclar hasta integrar. 
+6. Verter la mezcla en el molde y alisar la superficie. 
 7. Hornear 40-50 minutos, verificar con palillo. 
 8. Dejar enfriar antes de desmoldar y servir.', 
-'Harina, huevos, chocolate, manteca, azúcar, polvo de hornear, sal, esencia de vainilla', 
-'8 porciones', 'BUD', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/budinChocolate.png');
+'250 g harina, 3 huevos, 150 g chocolate, 100 g manteca, 150 g azúcar, 10 g polvo de hornear, 2 g sal, 5 ml esencia de vainilla', 
+8, 'BUD', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/budinChocolate.png', 0);
 
 -- ENSALADAS
-INSERT INTO recetas (nombreusuario, nombre, descripcion, pasos, ingredientes, porciones, codcategoria, hora, foto) VALUES
-('usuario', 'Ensalada de Atún', 'Ensalada para impresionar, llena de sabor y nutritiva, lista en menos de 5 minutos', 
-'1. Escurrir el atún y desmenuzarlo en un bol. 
-2. Lavar y cortar la lechuga, tomates y cebolla en juliana. 
-3. Mezclar todos los vegetales con el atún. 
-4. Agregar mayonesa al gusto y revolver suavemente. 
-5. Ajustar sal y pimienta. 
-6. Servir fresca.', 
-'Atún, lechuga, tomate, cebolla, mayonesa', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaAtun.png'),
+INSERT INTO recetas (nombreusuario, nombre, descripcion, pasos, ingredientes, porciones, codcategoria, hora, foto, favoritos) VALUES
+('usuario', 'Ensalada de Atún', 'Ensalada rápida, fresca y nutritiva, ideal para una comida ligera o acompañar un plato principal. Mezcla atún, lechuga, tomate y cebolla con mayonesa para un sabor delicioso y equilibrado. Perfecta para servir en menos de 5 minutos y disfrutar de un plato saludable lleno de proteínas y vegetales frescos.', 
+'1. Escurrir 150 g de atún en lata y desmenuzarlo en un bol grande. 
+2. Lavar 50 g de lechuga y cortarla en tiras finas. 
+3. Lavar y cortar 1 tomate y 30 g de cebolla en juliana. 
+4. Mezclar todos los vegetales con el atún. 
+5. Agregar 30 g de mayonesa al gusto y revolver suavemente. 
+6. Ajustar sal y pimienta. 
+7. Servir inmediatamente, fresca y bien presentada.', 
+'150 g atún, 50 g lechuga, 1 tomate, 30 g cebolla, 30 g mayonesa, sal y pimienta al gusto', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaAtun.png', 0),
 
-('usuario', 'Ensalada Caprese', 'Clásica ensalada italiana, fresca, fácil y deliciosa', 
-'1. Lavar y cortar tomates en rodajas. 
-2. Cortar la mozzarella en rodajas del mismo grosor. 
-3. Alternar rodajas de tomate y mozzarella en un plato. 
-4. Añadir hojas de albahaca fresca. 
-5. Rociar con aceite de oliva y un poco de sal. 
-6. Servir inmediatamente.', 
-'Tomate, mozzarella, albahaca, aceite de oliva, sal', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaCaprese.png'),
+('usuario', 'Ensalada Caprese', 'Clásica ensalada italiana, fresca y deliciosa, perfecta como entrada o acompañamiento. Alterna rodajas de tomate y mozzarella, agrega albahaca fresca y rocía con aceite de oliva y sal. Sencilla, elegante y llena de sabor mediterráneo, ideal para cualquier comida rápida y saludable.', 
+'1. Lavar 2 tomates medianos y cortarlos en rodajas de 0.5 cm. 
+2. Cortar 150 g de mozzarella en rodajas del mismo grosor. 
+3. Alternar rodajas de tomate y mozzarella en un plato grande. 
+4. Añadir 5 hojas de albahaca fresca. 
+5. Rociar con 10 ml de aceite de oliva y una pizca de sal. 
+6. Servir inmediatamente, fresca y decorativa.', 
+'2 tomates medianos, 150 g mozzarella, 5 hojas albahaca, 10 ml aceite de oliva, sal al gusto', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaCaprese.png', 0),
 
-('usuario', 'Ensalada César', 'Ensalada César con pollo, fácil y rápida, ideal para un almuerzo ligero', 
-'1. Lavar y cortar la lechuga. 
-2. Cocinar pechuga de pollo y cortarla en tiras. 
-3. Preparar aderezo César o usar comercial. 
-4. Mezclar lechuga, pollo y croutons. 
-5. Agregar aderezo y revolver suavemente. 
-6. Servir con queso rallado al gusto.', 
-'Lechuga, pollo, croutons, aderezo César, queso rallado', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaCesar.png'),
+('usuario', 'Ensalada César', 'Ensalada César con pollo, ideal para almuerzos ligeros y nutritivos. Mezcla lechuga fresca con tiras de pollo cocido, croutons y aderezo César. Se puede añadir queso rallado al gusto, obteniendo una combinación deliciosa de texturas y sabores para disfrutar como plato principal o acompañamiento.', 
+'1. Lavar 100 g de lechuga y cortarla en tiras. 
+2. Cocinar 150 g de pechuga de pollo y cortarla en tiras finas. 
+3. Preparar 30 g de aderezo César o usar comercial. 
+4. Mezclar la lechuga, el pollo y 20 g de croutons en un bol grande. 
+5. Agregar el aderezo y revolver suavemente. 
+6. Espolvorear 10 g de queso rallado al gusto. 
+7. Servir inmediatamente, fresca y sabrosa.', 
+'100 g lechuga, 150 g pollo, 20 g croutons, 30 g aderezo César, 10 g queso rallado', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaCesar.png', 0 ),
 
-('usuario', 'Ensalada de Garbanzos', 'Rápida, nutritiva y llena de sabor, ideal para comer sano', 
-'1. Lavar y escurrir los garbanzos cocidos. 
-2. Cortar tomate, pepino y cebolla en cubos pequeños. 
-3. Mezclar los vegetales con los garbanzos en un bol. 
-4. Agregar aceite, sal, pimienta y limón al gusto. 
-5. Revolver suavemente y servir.', 
-'Garbanzos, tomate, pepino, cebolla, aceite de oliva, sal, pimienta, limón', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaGarbanzos.png'),
+('usuario', 'Ensalada de Garbanzos', 'Ensalada rápida, nutritiva y llena de sabor, perfecta para comidas saludables. Combina garbanzos cocidos con vegetales frescos, agrega aceite de oliva, sal, pimienta y limón al gusto. Ideal como acompañamiento o plato principal ligero, mantiene la frescura y nutrientes de los ingredientes.', 
+'1. Lavar y escurrir 150 g de garbanzos cocidos. 
+2. Cortar 1 tomate, 50 g de pepino y 30 g de cebolla en cubos pequeños. 
+3. Mezclar los vegetales con los garbanzos en un bol grande. 
+4. Agregar 10 ml de aceite de oliva, sal, pimienta y 5 ml de jugo de limón al gusto. 
+5. Revolver suavemente y servir fresca.', 
+'150 g garbanzos cocidos, 1 tomate, 50 g pepino, 30 g cebolla, 10 ml aceite de oliva, 5 ml jugo de limón, sal y pimienta al gusto', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaGarbanzos.png', 0),
 
-('usuario', 'Ensalada Griega', 'Fresca, rápida y con auténtico sabor griego', 
-'1. Cortar tomate, pepino y cebolla en cubos medianos. 
-2. Desmenuzar queso feta y mezclar con aceitunas negras. 
-3. Añadir los vegetales en un bol y mezclar suavemente. 
-4. Rociar con aceite de oliva y ajustar sal y pimienta. 
-5. Servir inmediatamente.', 
-'Tomate, pepino, cebolla, aceitunas, queso feta, aceite de oliva, sal, pimienta', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaGriega.png'),
+('usuario', 'Ensalada Griega', 'Fresca y auténtica ensalada griega, rápida de preparar. Mezcla tomate, pepino, cebolla, queso feta y aceitunas negras, rocía con aceite de oliva y ajusta sal y pimienta. Ideal como entrada o acompañamiento, combina sabores mediterráneos y es perfecta para una comida saludable y ligera.', 
+'1. Cortar 1 tomate, 50 g de pepino y 30 g de cebolla en cubos medianos. 
+2. Desmenuzar 50 g de queso feta y mezclar con 20 g de aceitunas negras. 
+3. Añadir los vegetales en un bol grande y mezclar suavemente. 
+4. Rociar con 10 ml de aceite de oliva y ajustar sal y pimienta. 
+5. Servir inmediatamente, fresca y deliciosa.', 
+'1 tomate, 50 g pepino, 30 g cebolla, 50 g queso feta, 20 g aceitunas negras, 10 ml aceite de oliva, sal y pimienta al gusto', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaGriega.png', 0),
 
-('usuario', 'Ensalada de Pollo', 'Fácil ensalada con pollo, ideal para almuerzos rápidos y llenos de sabor', 
-'1. Cocinar y desmenuzar pollo. 
-2. Lavar y cortar lechuga, tomate y zanahoria. 
-3. Mezclar los vegetales con el pollo en un bol. 
-4. Agregar aceite de oliva, sal y pimienta. 
-5. Revolver suavemente y servir.', 
-'Pollo, lechuga, tomate, zanahoria, aceite de oliva, sal, pimienta', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaPollo.png'),
+('usuario', 'Ensalada de Pollo', 'Fácil ensalada con pollo, ideal para almuerzos rápidos y llenos de sabor. Combina pollo cocido desmenuzado con lechuga, tomate y zanahoria, aderezado con aceite de oliva, sal y pimienta. Un plato saludable, nutritivo y fresco, perfecto para cualquier ocasión.', 
+'1. Cocinar y desmenuzar 150 g de pollo. 
+2. Lavar y cortar 50 g de lechuga, 1 tomate y 50 g de zanahoria en tiras o cubos. 
+3. Mezclar los vegetales con el pollo en un bol grande. 
+4. Agregar 10 ml de aceite de oliva, sal y pimienta al gusto. 
+5. Revolver suavemente y servir fresca.', 
+'150 g pollo, 50 g lechuga, 1 tomate, 50 g zanahoria, 10 ml aceite de oliva, sal y pimienta al gusto', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaPollo.png', 0),
 
-('usuario', 'Ensalada de Quinoa', 'Ensalada saludable, rápida y nutritiva, perfecta para cualquier comida', 
-'1. Cocinar la quinoa según instrucciones del paquete. 
-2. Cortar tomate, pepino y zanahoria en cubos pequeños. 
-3. Mezclar la quinoa cocida con los vegetales. 
-4. Agregar aceite de oliva, sal, pimienta y limón al gusto. 
-5. Revolver y servir fresca.', 
-'Quinoa, tomate, pepino, zanahoria, aceite de oliva, sal, pimienta, limón', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaQuinoa.png'),
+('usuario', 'Ensalada de Quinoa', 'Ensalada saludable, rápida y nutritiva, perfecta para cualquier comida. La quinoa cocida se mezcla con vegetales frescos como tomate, pepino y zanahoria, agregando aceite de oliva, sal, pimienta y limón al gusto. Ideal como acompañamiento o plato principal ligero, mantiene todos los nutrientes y el sabor de los ingredientes.', 
+'1. Cocinar 100 g de quinoa según instrucciones del paquete y dejar enfriar. 
+2. Cortar 1 tomate, 50 g de pepino y 50 g de zanahoria en cubos pequeños. 
+3. Mezclar la quinoa cocida con los vegetales en un bol grande. 
+4. Agregar 10 ml de aceite de oliva, 5 ml de jugo de limón, sal y pimienta al gusto. 
+5. Revolver bien y servir fresca.', 
+'100 g quinoa, 1 tomate, 50 g pepino, 50 g zanahoria, 10 ml aceite de oliva, 5 ml jugo de limón, sal y pimienta al gusto', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaQuinoa.png', 0),
 
-('usuario', 'Ensalada Rusa', 'Clásica y rápida ensalada rusa, perfecta para acompañar cualquier plato', 
-'1. Cocinar papa, zanahoria y arvejas hasta que estén tiernas. 
-2. Cortar las verduras en cubos y dejar enfriar. 
-3. Mezclar con mayonesa al gusto. 
-4. Ajustar sal y pimienta. 
-5. Servir fría.', 
-'Papa, zanahoria, arvejas, mayonesa, sal, pimienta', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaRusa.png'),
+('usuario', 'Ensalada Rusa', 'Clásica ensalada rusa, rápida y fácil de preparar. Mezcla papa, zanahoria y arvejas cocidas con mayonesa, ajustando sal y pimienta. Ideal como acompañamiento o plato principal ligero, mantiene una textura cremosa y un sabor equilibrado, perfecta para cualquier comida.', 
+'1. Cocinar 100 g de papa y 50 g de zanahoria hasta que estén tiernas. 
+2. Cocinar 50 g de arvejas y dejar enfriar todas las verduras. 
+3. Cortar las verduras en cubos pequeños. 
+4. Mezclar con 30 g de mayonesa al gusto, ajustando sal y pimienta. 
+5. Servir fría, presentando un plato cremoso y colorido.', 
+'100 g papa, 50 g zanahoria, 50 g arvejas, 30 g mayonesa, sal y pimienta al gusto', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaRusa.png', 0),
 
-('usuario', 'Ensalada Thai', 'Ensalada rápida con sabor tailandés, fresca y llena de sabor', 
-'1. Lavar y cortar repollo y zanahoria en tiras finas. 
-2. Mezclar con maní tostado. 
-3. Preparar aderezo Thai (limón, salsa de soja, aceite de sésamo) y agregar a los vegetales. 
-4. Revolver bien y servir fresca.', 
-'Repollo, zanahoria, maní, limón, salsa de soja, aceite de sésamo', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaThai.png'),
+('usuario', 'Ensalada Thai', 'Ensalada rápida, fresca y con sabor tailandés, ideal para un plato ligero y lleno de sabor. Mezcla repollo y zanahoria con maní tostado y agrega un aderezo de limón, salsa de soja y aceite de sésamo. Perfecta como acompañamiento o entrada, combina textura crujiente con sabores ácidos y salados.', 
+'1. Lavar 50 g de repollo y 50 g de zanahoria, cortar en tiras finas. 
+2. Mezclar con 20 g de maní tostado en un bol grande. 
+3. Preparar aderezo Thai con 5 ml de limón, 10 ml de salsa de soja y 5 ml de aceite de sésamo. 
+4. Agregar el aderezo a los vegetales y mezclar bien. 
+5. Servir inmediatamente, fresca y crujiente.', 
+'50 g repollo, 50 g zanahoria, 20 g maní tostado, 5 ml limón, 10 ml salsa de soja, 5 ml aceite de sésamo', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaThai.png', 0),
 
-('usuario', 'Ensalada Waldorf', 'Fácil ensalada Waldorf, fresca, dulce y crujiente', 
-'1. Cortar manzana y apio en cubos pequeños. 
-2. Mezclar con nueces y pasas si se desea. 
-3. Agregar mayonesa y mezclar suavemente. 
-4. Servir inmediatamente.', 
-'Manzana, apio, nueces, mayonesa, pasas (opcional)', 
-'2 porciones', 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaWaldorf.png');
+('usuario', 'Ensalada Waldorf', 'Ensalada Waldorf fácil, fresca y con un equilibrio perfecto entre dulce y crujiente. Combina manzana y apio en cubos con nueces y pasas opcionales, aderezadas con mayonesa para un sabor delicado. Ideal como acompañamiento o plato principal ligero, mantiene frescura y textura agradable.', 
+'1. Cortar 1 manzana y 50 g de apio en cubos pequeños. 
+2. Mezclar con 30 g de nueces y 10 g de pasas opcionales. 
+3. Agregar 30 g de mayonesa y mezclar suavemente hasta integrar todos los ingredientes. 
+4. Servir inmediatamente, fresca y crujiente.', 
+'1 manzana, 50 g apio, 30 g nueces, 30 g mayonesa, 10 g pasas (opcional)', 
+2, 'ENS', NOW(), 'https://abrillopezdev.github.io/fotosRecetas/ensaladaWaldorf.png', 0);

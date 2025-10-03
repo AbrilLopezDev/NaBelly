@@ -6,8 +6,9 @@ import { Categoria } from './categoria-service';
 
 
 export interface Receta {
-   idReceta: number;
-  usuario: Usuario;      
+  idReceta: number;
+  usuario: Usuario;
+  nombre: string;      
   descripcion: string;
   pasos: string;
   ingredientes: string;
@@ -15,7 +16,7 @@ export interface Receta {
   categoria: Categoria;
   hora: string;          
   foto: string;
-    
+  favoritos: number;
 }
 
 @Injectable({

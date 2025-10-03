@@ -5,6 +5,7 @@ import { CategoriaService, Categoria } from '../services/categoria-service';
 import { RouterModule, Routes } from '@angular/router';
 import { UsuarioListadoCategoria } from '../pages/usuario-listado-categoria/usuario-listado-categoria';
 import { UsuarioInicio } from '../pages/usuario-inicio/usuario-inicio';
+import { Router } from '@angular/router';
 
 
 const routes: Routes = [
@@ -35,7 +36,7 @@ export class Navbar {
   dulces: Categoria[] = [];
   saladas: Categoria[] = [];
 
-  constructor(private userService: UserService, private categoriaService: CategoriaService) {}
+  constructor(private userService: UserService, private categoriaService: CategoriaService, private router: Router) {}
 
   ngOnInit() {
     this.userService.user$.subscribe(user => {
@@ -77,5 +78,10 @@ export class Navbar {
   togglePerfil() { this.perfilOpen = !this.perfilOpen; }
   toggleUserMiniMenu() { this.miniUserMenuOpen = !this.miniUserMenuOpen; }
   toggleSearch() { this.searchOpen = !this.searchOpen; }
+
+  cerrarSesion() {
+    this.userService.clearUser();  
+    this.router.navigate(['/login']); 
+  }
 
 }
