@@ -19,6 +19,8 @@ export class UsuarioListadoCategoria implements OnInit{
   recetas: Receta[] = [];
   categoria: Categoria | null = null;
   cantidadRecetas: number = 0;
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,10 +51,27 @@ export class UsuarioListadoCategoria implements OnInit{
         },
         err => console.error('Error al cargar la categoría', err)
       );
-    }
-
+    }   
     
     
   }
+   
+  get recetasPaginadas(): Receta[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.recetas.slice(start, start + this.itemsPerPage);
+  }
 
+  
+  get totalPages(): number {
+    return Math.ceil(this.cantidadRecetas / this.itemsPerPage);
+  }
+
+  
+  cambiarPagina(pagina: number) {
+    if (pagina >= 1 && pagina <= this.totalPages) {
+      this.currentPage = pagina;
+    }
+  }
 }
+
+

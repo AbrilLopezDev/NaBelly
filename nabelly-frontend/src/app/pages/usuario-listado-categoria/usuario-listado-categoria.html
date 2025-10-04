@@ -21,7 +21,7 @@
         </div>
 
         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div *ngFor="let receta of recetas" class="flex border-2 border-pink-custom rounded overflow-hidden">
+            <div *ngFor="let receta of recetasPaginadas" class="flex border-2 border-pink-custom rounded overflow-hidden shadow-md">
                 <!-- Imagen izquierda -->
                 <img [src]="receta.foto" alt="{{ receta.descripcion }}" class="w-1/3 object-cover">
 
@@ -29,7 +29,7 @@
                 <div class="w-2/3 p-4 bg-light-yellow-custom flex flex-col justify-between">
                     <div>
                         <h3 class="text-xl font-semibold">{{ receta.nombre }}</h3>
-                        <p class="text-sm text-gray-700">Autor: {{ receta.usuario.username }}</p>
+                        <p class="text-sm text-gray-700">Autor: {{ receta.autor }}</p>
                         <p class="mt-2 text-gray-800">{{ receta.descripcion | slice:0:130 }}...</p>
                     </div>
                     <div class="mt-4 flex justify-between text-sm text-gray-600">
@@ -38,6 +38,21 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="flex justify-center items-center gap-2 mt-6 mb-6">
+            <button (click)="cambiarPagina(currentPage - 1)" 
+                [disabled]="currentPage === 1"
+                class="px-3 py-1 border rounded bg-pink-custom shadow">
+                Anterior
+            </button>
+
+            <span>Página {{currentPage}} de {{totalPages}}</span>
+
+            <button (click)="cambiarPagina(currentPage + 1)" 
+                [disabled]="currentPage === totalPages"
+                class="px-3 py-1 border rounded bg-pink-custom shadow">
+                Siguiente
+            </button>
         </div>
     </div>
 </div>

@@ -49,21 +49,36 @@
             class="w-full h-full object-cover"
           />
         </div>
-
-        <!-- Menu usuario desplegable -->
         <div
           *ngIf="miniUserMenuOpen"
           class="absolute right-0 mt-4 w-40 translate-x-16 bg-light-yellow-custom text-black rounded-lg shadow-lg py-2 z-50"
         >
 
-          <div class="px-4 py-2 text-gray-700 font-semibold border-b border-red-custom">
-            ¡Hola, {{ usuario?.username }}!
-          </div>
+          <!-- Si hay usuario logueado -->
+          <ng-container *ngIf="usuario; else sinUsuario">
+            <div class="px-4 py-2 text-gray-700 font-semibold border-b border-red-custom">
+              ¡Hola, {{ usuario.username }}!
+            </div>
 
-          <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom">Mi perfil</button>
-          <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom">Favoritos</button>
-          <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom">Mis recetas</button>
-          <button class="block w-full text-left px-4 py-2 text-red-custom hover:bg-yellow-custom" (click)="cerrarSesion()">Cerrar sesión</button>
+            <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom">Mi perfil</button>
+            <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom">Favoritos</button>
+            <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom">Mis recetas</button>
+            <button class="block w-full text-left px-4 py-2 text-red-custom hover:bg-yellow-custom" (click)="cerrarSesion()">Cerrar sesión</button>
+          </ng-container>
+
+          <!-- Si NO hay usuario logueado -->
+          <ng-template #sinUsuario>
+            <div class="px-4 py-2 text-gray-700 font-semibold border-b border-red-custom">
+              ¡Bienvenido!
+            </div>
+
+            <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom" [routerLink]="'/login'">
+              Iniciar sesión
+            </button>
+            <button class="block w-full text-left px-4 py-2 hover:bg-yellow-custom" [routerLink]="'/signup'">
+              Registrarse
+            </button>
+          </ng-template>
         </div>
       </div>
 

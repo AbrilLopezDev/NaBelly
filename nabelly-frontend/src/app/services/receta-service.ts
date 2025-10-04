@@ -7,13 +7,13 @@ import { Categoria } from './categoria-service';
 
 export interface Receta {
   idReceta: number;
-  usuario: Usuario;
+  autor: string;
   nombre: string;      
   descripcion: string;
   pasos: string;
   ingredientes: string;
   porciones: number;
-  categoria: Categoria;
+  categoria: string;
   hora: string;          
   foto: string;
   favoritos: number;

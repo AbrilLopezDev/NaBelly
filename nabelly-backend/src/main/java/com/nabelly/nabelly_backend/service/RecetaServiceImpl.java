@@ -2,6 +2,7 @@ package com.nabelly.nabelly_backend.service;
 
 import com.nabelly.nabelly_backend.entity.Receta;
 import com.nabelly.nabelly_backend.repository.RecetaRepository;
+import dto.RecetaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,22 @@ public class RecetaServiceImpl implements RecetaService{
     RecetaRepository recetaRepository;
 
     @Override
-    public List<Receta> RecetasXCategoria(String codCategoria) {
-        return recetaRepository.findByCategoriaCodCategoria(codCategoria);
+    public List<RecetaDTO> RecetasXCategoria(String codCategoria) {
+        List<Receta> recetas = recetaRepository.findByCategoriaCodCategoria(codCategoria);
+        return recetas.stream().map(receta -> {
+            RecetaDTO dto = new RecetaDTO();
+            dto.setIdReceta(receta.getIdReceta());
+            dto.setNombre(receta.getNombre());
+            dto.setDescripcion(receta.getDescripcion());
+            dto.setPasos(receta.getPasos());
+            dto.setIngredientes(receta.getIngredientes());
+            dto.setPorciones(receta.getPorciones());
+            dto.setCategoria(receta.getCategoria().getNombre());
+            dto.setHora(receta.getHora());
+            dto.setFoto(receta.getFoto());
+            dto.setFavoritos(receta.getFavoritos());
+            dto.setAutor(receta.getUsuario().getNombreusuario());
+            return dto;
+        }).toList();
     }
 }
