@@ -17,8 +17,14 @@ public class RecetaController {
     RecetaService recetaService;
 
     @GetMapping("/categoria/{codCategoria}")
-    public ResponseEntity<List<RecetaDTO>> CategoriasXTipo (@PathVariable String codCategoria){
+    public ResponseEntity<List<RecetaDTO>> RecetasXCategoria (@PathVariable String codCategoria){
         List<RecetaDTO> recetas = recetaService.RecetasXCategoria(codCategoria);
+        return ResponseEntity.ok(recetas);
+    }
+
+    @GetMapping("/user/{nombreusuario}")
+    public ResponseEntity<List<RecetaDTO>> RecetasXUsername (@PathVariable String nombreusuario){
+        List<RecetaDTO> recetas = recetaService.RecetasXUsername(nombreusuario);
         return ResponseEntity.ok(recetas);
     }
 

@@ -26,7 +26,7 @@ export class AuthLogin {
         // Guardar token y rol
         sessionStorage.setItem('token', res.token);
         sessionStorage.setItem('role', res.role);
-
+        sessionStorage.setItem('username', this.username);
         
         this.userService.loadUserData().subscribe(user => {
           this.userService.setUser(user); // guardaR usuario completo en BehaviorSubject y sesión

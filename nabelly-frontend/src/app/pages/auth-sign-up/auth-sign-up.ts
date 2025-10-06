@@ -79,6 +79,7 @@ export class AuthSignUp {
       // Guardar token
       sessionStorage.setItem('token', res.token);
       sessionStorage.setItem('role', res.role);
+      sessionStorage.setItem('username', this.username);
 
       // Cargar datos completos del usuario
       this.userService.loadUserData().subscribe(user => {

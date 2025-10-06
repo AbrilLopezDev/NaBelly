@@ -21,13 +21,10 @@ public class CategoriaController {
     public ResponseEntity <List<Categoria>> CategoriasXTipo (@PathVariable String idtipo){
         List<Categoria> categorias = categoriaService.CategoriaXTipoReceta(idtipo);
 
-
         if (categorias.isEmpty()) {
             System.out.println("Vacia");
             return ResponseEntity.status(204).body(null);
         }
-
-
         return ResponseEntity.ok(categorias);
     }
 

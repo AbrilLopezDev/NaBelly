@@ -6,11 +6,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { UsuarioListadoCategoria } from '../pages/usuario-listado-categoria/usuario-listado-categoria';
 import { UsuarioInicio } from '../pages/usuario-inicio/usuario-inicio';
 import { Router } from '@angular/router';
+import { UsuarioRecetas } from '../pages/usuario-recetas/usuario-recetas';
 
 
 const routes: Routes = [
   { path: 'inicio', component: UsuarioInicio },
-  { path: 'usuario-listado-categoria/:codcategoria', component: UsuarioListadoCategoria }
+  { path: 'usuario-listado-categoria/:codcategoria', component: UsuarioListadoCategoria },
+  { path: 'usuario-recetas', component: UsuarioRecetas}
 ];
 
 @Component({
@@ -83,5 +85,10 @@ export class Navbar {
     this.userService.clearUser();  
     this.router.navigate(['/login']); 
   }
+  
+  irMisRecetas() {
+  this.router.navigate(['/usuario-recetas']);
+  this.toggleMenu(); // cerrar menú
+}
 
 }

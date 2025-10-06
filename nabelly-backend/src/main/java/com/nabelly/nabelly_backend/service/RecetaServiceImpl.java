@@ -33,4 +33,26 @@ public class RecetaServiceImpl implements RecetaService{
             return dto;
         }).toList();
     }
+
+    @Override
+    public List<RecetaDTO> RecetasXUsername(String username) {
+        List<Receta> recetas = recetaRepository.findByUsuario_Nombreusuario(username);
+        return recetas.stream().map(receta -> {
+            RecetaDTO dto = new RecetaDTO();
+            dto.setIdReceta(receta.getIdReceta());
+            dto.setNombre(receta.getNombre());
+            dto.setDescripcion(receta.getDescripcion());
+            dto.setPasos(receta.getPasos());
+            dto.setIngredientes(receta.getIngredientes());
+            dto.setPorciones(receta.getPorciones());
+            dto.setCategoria(receta.getCategoria().getNombre());
+            dto.setHora(receta.getHora());
+            dto.setFoto(receta.getFoto());
+            dto.setFavoritos(receta.getFavoritos());
+            dto.setAutor(receta.getUsuario().getNombreusuario());
+            return dto;
+        }).toList();
+    }
+
+
 }

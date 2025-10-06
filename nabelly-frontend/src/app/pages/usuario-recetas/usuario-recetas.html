@@ -1,0 +1,11 @@
+<div class="bg-orange-custom flex justify-center h-[calc(100vh-6rem)] md:h-[calc(100vh-8rem)] w-full">
+    <div *ngIf="mensaje; else listaRecetas " 
+       class="text-center text-red-custom font-bold text-3xl md:text-4xl flex items-center justify-center">
+    {{ mensaje }}
+  </div>
+
+    <ng-template #listaRecetas>
+    </ng-template>
+</div>
+
+ 

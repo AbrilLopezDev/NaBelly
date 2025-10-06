@@ -6,6 +6,7 @@ import { UsuarioInicio } from './pages/usuario-inicio/usuario-inicio';
 import { AuthSignUp } from './pages/auth-sign-up/auth-sign-up'; 
 import { AuthRecovery } from './pages/auth-recovery/auth-recovery';
 import { UsuarioListadoCategoria } from './pages/usuario-listado-categoria/usuario-listado-categoria';
+import { UsuarioRecetas } from './pages/usuario-recetas/usuario-recetas';
 
 export const routes: Routes = [
   {
@@ -23,7 +24,8 @@ export const routes: Routes = [
     component: MainLayout,
     children: [
       { path: 'inicio', component: UsuarioInicio },
-      { path: 'usuario-listado-categoria/:codCategoria', component: UsuarioListadoCategoria },     
+      { path: 'usuario-listado-categoria/:codCategoria', component: UsuarioListadoCategoria },
+      { path: 'usuario-recetas', component: UsuarioRecetas},   
     ]
   }
 ];
