@@ -17,6 +17,7 @@ export interface Receta {
   hora: string;          
   foto: string;
   favoritos: number;
+  showMenu?: boolean; 
 }
 
 @Injectable({

@@ -1,11 +1,88 @@
-<div class="bg-orange-custom flex justify-center h-[calc(100vh-6rem)] md:h-[calc(100vh-8rem)] w-full">
+<div class="bg-orange-custom flex justify-center w-full h-full">
+    
+  <div class="md:w-[60%] w-full mx-auto mt-4">
+        <div class="flex items-center justify-between mb-2">
+      <h2 class="text-2xl font-bold">
+        Subir receta
+      </h2>
+      <button 
+        routerLink="/usuario-subir-receta"
+        class="bg-red-custom text-white rounded-full 
+         w-10 h-10 flex items-center justify-center text-2xl shadow-lg 
+         transition-transform duration-200 hover:scale-110">
+        +
+      </button>
+    </div>
+
+    <div class="border-t-2 border-red-custom mb-4"></div>
+
     <div *ngIf="mensaje; else listaRecetas " 
-       class="text-center text-red-custom font-bold text-3xl md:text-4xl flex items-center justify-center">
-    {{ mensaje }}
-  </div>
+        class="text-center text-red-custom font-bold text-3xl md:text-4xl flex items-center justify-center">
+        {{ mensaje }}
+    </div>
 
     <ng-template #listaRecetas>
+      <div class="mt-2 flex justify-between items-center">
+        <h3 >
+            {{cantidadRecetas}} recetas subidas
+        </h3>
+        
+      </div>
+
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div *ngFor="let receta of recetasPaginadas" class="flex border-2 border-pink-custom rounded overflow-hidden shadow-md">
+            <!-- Imagen izquierda -->
+            <img [src]="receta.foto" alt="{{ receta.descripcion }}" class="w-1/3 object-cover">
+
+            <!-- Info derecha -->
+            <div class="w-2/3 p-4 bg-light-yellow-custom flex flex-col justify-between relative">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="text-xl font-semibold">{{ receta.nombre }}</h3> 
+                  <p class="text-sm text-gray-700">Autor: {{ receta.autor }}</p>
+                </div>
+
+                <div class="relative">
+                  <button (click)="toggleMenu(receta.idReceta)" class="text-gray-500 hover:text-gray-800 text-2xl font-bold">
+                    ⋮
+                  </button>
+
+                  <!-- Menú desplegable -->
+                  <div *ngIf="receta.showMenu" class="absolute right-0 top-full mt-1 w-32 bg-yellow-custom border rounded shadow z-50">
+                    <button (click)="editarReceta(receta)" class="block w-full text-left px-4 py-2 hover:bg-light-yellow-custom">Editar</button>
+                    <button (click)="borrarReceta(receta)" class="block w-full text-left px-4 py-2 hover:bg-light-yellow-custom text-red-custom">Borrar</button>
+                  </div>
+                </div>
+             </div>
+  
+            <p class="mt-2 text-gray-800">{{ receta.descripcion | slice:0:130 }}...</p>
+
+            <!-- Info inferior -->
+            <div class="mt-4 flex justify-between text-sm text-gray-600">
+              <span>❤️ {{ receta.favoritos || 0 }}</span>
+              <span>{{ receta.hora | date:'dd/MM/yyyy' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+        <div class="flex justify-center items-center gap-2 mt-6 mb-6">
+            <button (click)="cambiarPagina(currentPage - 1)" 
+                [disabled]="currentPage === 1"
+                class="px-3 py-1 border rounded bg-pink-custom shadow">
+                Anterior
+            </button>
+
+            <span>Página {{currentPage}} de {{totalPages}}</span>
+
+            <button (click)="cambiarPagina(currentPage + 1)" 
+                [disabled]="currentPage === totalPages"
+                class="px-3 py-1 border rounded bg-pink-custom shadow">
+                Siguiente
+            </button>
+        </div>
     </ng-template>
+  </div>
 </div>
 
  

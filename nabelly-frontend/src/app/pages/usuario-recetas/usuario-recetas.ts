@@ -15,6 +15,9 @@ export class UsuarioRecetas implements OnInit {
 
   recetas: Receta[] = [];
   mensaje: string = '';
+  cantidadRecetas: number = 0;
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
 
   constructor(
     private router: Router,
@@ -36,6 +39,7 @@ export class UsuarioRecetas implements OnInit {
     this.recetaService.getRecetasPorUsuario(username).subscribe({
       next: (data) => {
         this.recetas = data;
+        this.cantidadRecetas = this.recetas.length;
         if (this.recetas.length === 0) {
           this.mensaje = 'No has publicado recetas aún :(';
         }
@@ -46,6 +50,43 @@ export class UsuarioRecetas implements OnInit {
       }
     });
   }
+
+  get recetasPaginadas(): Receta[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.recetas.slice(start, start + this.itemsPerPage);
+  }
+
+  
+  get totalPages(): number {
+    return Math.ceil(this.cantidadRecetas / this.itemsPerPage);
+  }
+
+  
+  cambiarPagina(pagina: number) {
+    if (pagina >= 1 && pagina <= this.totalPages) {
+      this.currentPage = pagina;
+    }
+  }
+
+  toggleMenu(id: number) {
+  this.recetasPaginadas.forEach(r => {
+    if (r.idReceta === id) {
+      r.showMenu = !r.showMenu;
+    } else {
+      r.showMenu = false; // cerrar otros menús
+    }
+  });
+}
+
+editarReceta(receta: any) {
+  console.log('Editar receta:', receta);
+  
+}
+
+borrarReceta(receta: any) {
+  console.log('Borrar receta:', receta);
+ 
+}
 
 
 }
