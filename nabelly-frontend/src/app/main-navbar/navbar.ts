@@ -7,6 +7,7 @@ import { UsuarioListadoCategoria } from '../pages/usuario-listado-categoria/usua
 import { UsuarioInicio } from '../pages/usuario-inicio/usuario-inicio';
 import { Router } from '@angular/router';
 import { UsuarioRecetas } from '../pages/usuario-recetas/usuario-recetas';
+import { HostListener, ElementRef } from '@angular/core';
 
 
 const routes: Routes = [
@@ -38,7 +39,9 @@ export class Navbar {
   dulces: Categoria[] = [];
   saladas: Categoria[] = [];
 
-  constructor(private userService: UserService, private categoriaService: CategoriaService, private router: Router) {}
+  constructor(private userService: UserService, private categoriaService: CategoriaService, 
+    private router: Router, private elementRef: ElementRef
+  ) {}
 
   ngOnInit() {
     this.userService.user$.subscribe(user => {
@@ -87,8 +90,16 @@ export class Navbar {
   }
   
   irMisRecetas() {
-  this.router.navigate(['/usuario-recetas']);
-  this.toggleMenu(); // cerrar menú
-}
+    this.router.navigate(['/usuario-recetas']);
+    this.menuOpen = false;
+  }
+
+  @HostListener('document:click', ['$event']) 
+    clickFuera(event: Event) {
+      const clickedInside = this.elementRef.nativeElement.contains(event.target);
+      if (!clickedInside && this.miniUserMenuOpen) {
+        this.miniUserMenuOpen = false;
+      }
+  }
 
 }

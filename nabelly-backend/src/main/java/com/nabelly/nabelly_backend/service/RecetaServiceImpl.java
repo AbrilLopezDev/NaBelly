@@ -54,5 +54,20 @@ public class RecetaServiceImpl implements RecetaService{
         }).toList();
     }
 
+    @Override
+    public boolean eliminarReceta( Integer idReceta) {
+        if(recetaRepository.existsById(idReceta)) {
+            try {
+                recetaRepository.deleteById(idReceta);
+                return true; // se borró
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false; // hubo un error
+            }
+        } else {
+            return false; // no existe
+        }
+    }
+
 
 }

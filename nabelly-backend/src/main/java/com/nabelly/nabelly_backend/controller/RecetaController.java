@@ -29,4 +29,16 @@ public class RecetaController {
     }
 
 
+    @DeleteMapping("/delete/{idReceta}")
+    public ResponseEntity<Void> eliminarReceta(@PathVariable Integer idReceta) {
+        boolean eliminado = recetaService.eliminarReceta(idReceta);
+        if(eliminado){
+            return ResponseEntity.ok().build(); // 200 OK
+        } else {
+            return ResponseEntity.notFound().build(); // 404 si no existe
+        }
+    }
+
+
+
 }

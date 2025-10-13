@@ -8,4 +8,5 @@ import java.util.List;
 public interface RecetaService {
     List<RecetaDTO> RecetasXCategoria(String codCategoria);
     List<RecetaDTO> RecetasXUsername(String username);
+    boolean eliminarReceta(Integer idReceta);
 }

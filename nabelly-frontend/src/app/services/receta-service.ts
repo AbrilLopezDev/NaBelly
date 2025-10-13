@@ -33,8 +33,10 @@ export class RecetaService {
       return this.http.get<Receta[]>(`${this.apiUrl}/categoria/${codCategoria}`);
       }
     getRecetasPorUsuario(nombreusuario: string):Observable<Receta[]>{ //si la lista viene vacía mostrar mensaje no hay recetas aún    
-    return this.http.get<Receta[]>(`${this.apiUrl}/user/${nombreusuario}`);
-  
+      return this.http.get<Receta[]>(`${this.apiUrl}/user/${nombreusuario}`);
+    }
+    eliminarReceta(idReceta: number): Observable<any> {
+      return this.http.delete(`${this.apiUrl}/delete/${idReceta}`);
     }
 
 }

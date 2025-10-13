@@ -4,6 +4,7 @@ import { RecetaService } from '../../services/receta-service';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
+import {  HostListener, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-usuario-recetas',
@@ -18,10 +19,13 @@ export class UsuarioRecetas implements OnInit {
   cantidadRecetas: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 8;
+  recetaAEliminar: Receta | null = null;
+  confirmarEliminarModal = false;
 
   constructor(
     private router: Router,
-    private recetaService: RecetaService 
+    private recetaService: RecetaService,
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -83,10 +87,49 @@ editarReceta(receta: any) {
   
 }
 
-borrarReceta(receta: any) {
-  console.log('Borrar receta:', receta);
- 
+solicitarEliminar(receta: Receta) {
+  this.recetaAEliminar = receta;
+  this.confirmarEliminarModal = true; // muestra el modal
 }
+
+confirmarEliminar() { 
+  if (!this.recetaAEliminar) return;
+  const username = sessionStorage.getItem('username');
+  if (!username) return;
+
+  this.recetaService.eliminarReceta(this.recetaAEliminar.idReceta).subscribe({
+    next: (exito) => {
+      if (exito) {
+        // Eliminar localmente
+        this.recetas = this.recetas.filter(r => r.idReceta !== this.recetaAEliminar?.idReceta);
+        this.cantidadRecetas = this.recetas.length;
+        if(this.currentPage > this.totalPages) {
+          this.currentPage = this.totalPages || 1;
+        }
+        console.log('Receta eliminada permanentemente');
+      }
+    },
+    error: (err) => {
+      console.error('Error al eliminar receta:', err);
+    }
+  });
+
+  this.confirmarEliminarModal = false;
+  this.recetaAEliminar = null;
+  }
+
+  cancelarEliminar() {
+  this.confirmarEliminarModal = false;
+  this.recetaAEliminar = null;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickFuera(event: Event) {
+    const clickedInside = this.elementRef.nativeElement.contains(event.target);
+    if (!clickedInside) {
+      this.recetasPaginadas.forEach(r => r.showMenu = false);
+    }
+  }
 
 
 }
