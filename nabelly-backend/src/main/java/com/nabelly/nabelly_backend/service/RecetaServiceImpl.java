@@ -14,44 +14,32 @@ public class RecetaServiceImpl implements RecetaService{
     @Autowired
     RecetaRepository recetaRepository;
 
+    private RecetaDTO mapToDTO(Receta receta) {
+        RecetaDTO dto = new RecetaDTO();
+        dto.setIdReceta(receta.getIdReceta());
+        dto.setNombre(receta.getNombre());
+        dto.setDescripcion(receta.getDescripcion());
+        dto.setPasos(receta.getPasos());
+        dto.setIngredientes(receta.getIngredientes());
+        dto.setPorciones(receta.getPorciones());
+        dto.setCategoria(receta.getCategoria().getNombre());
+        dto.setHora(receta.getHora());
+        dto.setFoto(receta.getFoto());
+        dto.setFavoritos(receta.getFavoritos());
+        dto.setAutor(receta.getUsuario().getNombreusuario());
+        return dto;
+    }
+
     @Override
     public List<RecetaDTO> RecetasXCategoria(String codCategoria) {
         List<Receta> recetas = recetaRepository.findByCategoriaCodCategoria(codCategoria);
-        return recetas.stream().map(receta -> {
-            RecetaDTO dto = new RecetaDTO();
-            dto.setIdReceta(receta.getIdReceta());
-            dto.setNombre(receta.getNombre());
-            dto.setDescripcion(receta.getDescripcion());
-            dto.setPasos(receta.getPasos());
-            dto.setIngredientes(receta.getIngredientes());
-            dto.setPorciones(receta.getPorciones());
-            dto.setCategoria(receta.getCategoria().getNombre());
-            dto.setHora(receta.getHora());
-            dto.setFoto(receta.getFoto());
-            dto.setFavoritos(receta.getFavoritos());
-            dto.setAutor(receta.getUsuario().getNombreusuario());
-            return dto;
-        }).toList();
+        return recetas.stream().map(this::mapToDTO).toList();
     }
 
     @Override
     public List<RecetaDTO> RecetasXUsername(String username) {
         List<Receta> recetas = recetaRepository.findByUsuario_Nombreusuario(username);
-        return recetas.stream().map(receta -> {
-            RecetaDTO dto = new RecetaDTO();
-            dto.setIdReceta(receta.getIdReceta());
-            dto.setNombre(receta.getNombre());
-            dto.setDescripcion(receta.getDescripcion());
-            dto.setPasos(receta.getPasos());
-            dto.setIngredientes(receta.getIngredientes());
-            dto.setPorciones(receta.getPorciones());
-            dto.setCategoria(receta.getCategoria().getNombre());
-            dto.setHora(receta.getHora());
-            dto.setFoto(receta.getFoto());
-            dto.setFavoritos(receta.getFavoritos());
-            dto.setAutor(receta.getUsuario().getNombreusuario());
-            return dto;
-        }).toList();
+        return recetas.stream().map(this::mapToDTO).toList();
     }
 
     @Override
@@ -72,21 +60,7 @@ public class RecetaServiceImpl implements RecetaService{
     @Override
     public List<RecetaDTO> RecetaXNombre(String Nombre) {
         List<Receta> recetas = recetaRepository.findByNombreContainingIgnoreCase(Nombre);
-        return recetas.stream().map(receta -> {
-            RecetaDTO dto = new RecetaDTO();
-            dto.setIdReceta(receta.getIdReceta());
-            dto.setNombre(receta.getNombre());
-            dto.setDescripcion(receta.getDescripcion());
-            dto.setPasos(receta.getPasos());
-            dto.setIngredientes(receta.getIngredientes());
-            dto.setPorciones(receta.getPorciones());
-            dto.setCategoria(receta.getCategoria().getNombre());
-            dto.setHora(receta.getHora());
-            dto.setFoto(receta.getFoto());
-            dto.setFavoritos(receta.getFavoritos());
-            dto.setAutor(receta.getUsuario().getNombreusuario());
-            return dto;
-        }).toList();
+        return recetas.stream().map(this::mapToDTO).toList();
     }
 
 
