@@ -30,10 +30,11 @@ export class UsuarioListadoCategoria implements OnInit{
 
   ngOnInit(): void {
     // Obtener parametro de la URL
-    this.codCategoria = this.route.snapshot.paramMap.get('codCategoria');
+     this.route.paramMap.subscribe(params => {
+    this.codCategoria = params.get('codCategoria');
 
     if (this.codCategoria) {
-      
+      // Cargar recetas
       this.recetaService.getRecetasPorCategoria(this.codCategoria).subscribe(
         data => {
           this.recetas = data;
@@ -43,18 +44,17 @@ export class UsuarioListadoCategoria implements OnInit{
           console.error('Error al cargar recetas', err);
         }
       );
-    }
-      if (this.codCategoria) {
-        this.categoriaService.getCategoriaPorCodCategoria(this.codCategoria).subscribe(
+
+      // Cargar categoría
+      this.categoriaService.getCategoriaPorCodCategoria(this.codCategoria).subscribe(
         cat => {
           this.categoria = cat;
         },
         err => console.error('Error al cargar la categoría', err)
       );
-    }   
-    
-    
-  }
+    }         
+  });
+}
    
   get recetasPaginadas(): Receta[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
