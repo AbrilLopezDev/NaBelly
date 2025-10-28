@@ -28,9 +28,8 @@ public class RecetaController {
         return ResponseEntity.ok(recetas);
     }
 
-
     @DeleteMapping("/delete/{idReceta}")
-    public ResponseEntity<Void> eliminarReceta(@PathVariable Integer idReceta) {
+    public ResponseEntity<Void> eliminarReceta (@PathVariable Integer idReceta) {
         boolean eliminado = recetaService.eliminarReceta(idReceta);
         if(eliminado){
             return ResponseEntity.ok().build(); // 200 OK
@@ -39,6 +38,24 @@ public class RecetaController {
         }
     }
 
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<List<RecetaDTO>> RecetasXNombre (@PathVariable String nombre){
+        List<RecetaDTO> recetas = recetaService.RecetasXUsername(nombre);
+        return ResponseEntity.ok(recetas);
+    }
 
+/*
+    // DELETE api/recetas/delete/{idReceta}
+        [HttpDelete]
+            [Route("delete/{idReceta}")]
+    public IHttpActionResult EliminarReceta(int idReceta)
+    {
+        bool eliminado = _recetaService.EliminarReceta(idReceta);
 
+        if (eliminado)
+            return Ok(); // 200 OK
+        else
+            return NotFound(); // 404 Not Found
+    }
+    */
 }

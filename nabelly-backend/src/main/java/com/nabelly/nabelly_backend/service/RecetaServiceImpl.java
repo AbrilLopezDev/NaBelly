@@ -69,5 +69,25 @@ public class RecetaServiceImpl implements RecetaService{
         }
     }
 
+    @Override
+    public List<RecetaDTO> RecetaXNombre(String Nombre) {
+        List<Receta> recetas = recetaRepository.findByNombreContainingIgnoreCase(Nombre);
+        return recetas.stream().map(receta -> {
+            RecetaDTO dto = new RecetaDTO();
+            dto.setIdReceta(receta.getIdReceta());
+            dto.setNombre(receta.getNombre());
+            dto.setDescripcion(receta.getDescripcion());
+            dto.setPasos(receta.getPasos());
+            dto.setIngredientes(receta.getIngredientes());
+            dto.setPorciones(receta.getPorciones());
+            dto.setCategoria(receta.getCategoria().getNombre());
+            dto.setHora(receta.getHora());
+            dto.setFoto(receta.getFoto());
+            dto.setFavoritos(receta.getFavoritos());
+            dto.setAutor(receta.getUsuario().getNombreusuario());
+            return dto;
+        }).toList();
+    }
+
 
 }

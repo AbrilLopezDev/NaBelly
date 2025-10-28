@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface RecetaRepository extends JpaRepository<Receta, Integer> {
     List<Receta> findByCategoriaCodCategoria(String codCategoria);
     List<Receta> findByUsuario_Nombreusuario(String nombreusuario);
+    // sin distinguir mayusculas o minusculas
+    List<Receta> findByNombreContainingIgnoreCase(String nombre);
 }

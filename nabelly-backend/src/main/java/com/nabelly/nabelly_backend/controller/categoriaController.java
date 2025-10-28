@@ -28,6 +28,8 @@ public class CategoriaController {
         return ResponseEntity.ok(categorias);
     }
 
+
+
     @GetMapping("/codigo/{codCategoria}")
     public ResponseEntity<Categoria> CategoriasXCodCategoria (@PathVariable String codCategoria){
         Categoria categoria = categoriaService.CategoriaXCodCategoria(codCategoria);

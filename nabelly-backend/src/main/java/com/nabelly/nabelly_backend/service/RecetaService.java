@@ -9,4 +9,5 @@ public interface RecetaService {
     List<RecetaDTO> RecetasXCategoria(String codCategoria);
     List<RecetaDTO> RecetasXUsername(String username);
     boolean eliminarReceta(Integer idReceta);
+    List<RecetaDTO> RecetaXNombre(String Nombre);
 }
