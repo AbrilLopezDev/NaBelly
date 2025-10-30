@@ -58,7 +58,7 @@ public class RecetaServiceImpl implements RecetaService{
     }
 
     @Override
-    public List<RecetaDTO> RecetaXNombre(String Nombre) {
+    public List<RecetaDTO> RecetasXNombre(String Nombre) {
         List<Receta> recetas = recetaRepository.findByNombreContainingIgnoreCase(Nombre);
         return recetas.stream().map(this::mapToDTO).toList();
     }

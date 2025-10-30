@@ -40,7 +40,7 @@ public class RecetaController {
 
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<List<RecetaDTO>> RecetasXNombre (@PathVariable String nombre){
-        List<RecetaDTO> recetas = recetaService.RecetasXUsername(nombre);
+        List<RecetaDTO> recetas = recetaService.RecetasXNombre(nombre);
         return ResponseEntity.ok(recetas);
     }
 
