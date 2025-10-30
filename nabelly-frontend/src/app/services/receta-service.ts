@@ -38,6 +38,9 @@ export class RecetaService {
     eliminarReceta(idReceta: number): Observable<any> {
       return this.http.delete(`${this.apiUrl}/delete/${idReceta}`);
     }
+    getRecetasPorNombre( nombre: string ): Observable<Receta[]>{
+      return this.http.get<Receta[]>(`${this.apiUrl}/nombre/${nombre}`);
+    }
 
 }
   

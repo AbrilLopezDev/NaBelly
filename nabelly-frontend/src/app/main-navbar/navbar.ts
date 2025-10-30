@@ -8,6 +8,9 @@ import { UsuarioInicio } from '../pages/usuario-inicio/usuario-inicio';
 import { Router } from '@angular/router';
 import { UsuarioRecetas } from '../pages/usuario-recetas/usuario-recetas';
 import { HostListener, ElementRef } from '@angular/core';
+import { RecetaService } from '../services/receta-service';
+import { Receta } from '../services/receta-service';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -20,7 +23,7 @@ const routes: Routes = [
   selector: 'app-navbar',
   standalone: true,
   templateUrl: './navbar.html',
-  imports: [CommonModule, NgIf, NgFor, RouterModule],
+  imports: [CommonModule, NgIf, NgFor, RouterModule, FormsModule],
   styleUrls: ['./navbar.css']
 })
 export class Navbar {
@@ -38,9 +41,11 @@ export class Navbar {
 
   dulces: Categoria[] = [];
   saladas: Categoria[] = [];
+  searchTerm: string = '';
+  sugerencias: Receta[] = [];
 
   constructor(private userService: UserService, private categoriaService: CategoriaService, 
-    private router: Router, private elementRef: ElementRef
+    private router: Router, private elementRef: ElementRef, private recetaService: RecetaService
   ) {}
 
   ngOnInit() {
@@ -100,6 +105,35 @@ export class Navbar {
       if (!clickedInside && this.miniUserMenuOpen) {
         this.miniUserMenuOpen = false;
       }
+  }
+
+  onSearchChange() {
+    const term = this.searchTerm.trim();
+
+    if (term.length === 0) {
+      this.sugerencias = [];
+      return;
+    }
+
+    this.recetaService.getRecetasPorNombre(term).subscribe({
+      next: (recetas) => {
+        this.sugerencias = recetas
+        .filter((r, i, arr) => arr.findIndex(x => x.nombre === r.nombre) === i) // no se repiten
+        .slice(0, 5); // mostrar 5 sugerencias 
+      },
+      error: (err) => {
+        console.error('Error al buscar recetas:', err);
+        this.sugerencias = [];
+      }
+    });
+  }
+
+  seleccionarReceta(receta: Receta) {
+    this.searchTerm = receta.nombre;
+    this.sugerencias = [];
+    this.searchOpen = false;
+
+    
   }
 
 }
