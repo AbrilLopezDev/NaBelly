@@ -44,6 +44,18 @@ public class RecetaController {
         return ResponseEntity.ok(recetas);
     }
 
+    @DeleteMapping("/edit/{Receta}")
+    public ResponseEntity<Void> editarReceta (@PathVariable Receta receta) {
+        boolean editado = recetaService.editarReceta(receta);
+        if(editado){
+            return ResponseEntity.ok().build(); 
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
 /*
     // DELETE api/recetas/delete/{idReceta}
         [HttpDelete]

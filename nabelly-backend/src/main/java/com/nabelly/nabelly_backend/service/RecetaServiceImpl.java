@@ -63,5 +63,15 @@ public class RecetaServiceImpl implements RecetaService{
         return recetas.stream().map(this::mapToDTO).toList();
     }
 
+    @Override
+    public boolean editarReceta(Receta receta) {
+        try {
+            recetaRepository.save(receta);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
 }
