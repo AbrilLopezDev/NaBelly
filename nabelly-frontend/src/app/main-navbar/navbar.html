@@ -175,8 +175,8 @@
         </button>
         <ul *ngIf="perfilOpen" class="ml-4 mt-2 flex flex-col space-y-2">
           <li><button class="text-red-custom" >Mi perfil</button></li>
-          <li><button class="text-red-custom" >Mis recetas</button></li>
-          <li><button class="text-red-custom" >Cerrar sesión</button></li>
+          <li><button class="text-red-custom" (click)="irMisRecetas()" >Mis recetas</button></li>
+          <li><button class="text-red-custom" (click)="cerrarSesion()" >Cerrar sesión</button></li>
         </ul>
       </li>
       <li><button>Favoritos</button></li>
