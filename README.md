@@ -25,5 +25,6 @@
   <img src="./images/InicioNav.png" alt="Foto 4" width="46%" style="margin-bottom:10px;" />
   <img src="./images/MenuLateral.png" alt="Foto 5" width="46%" style="margin-bottom:10px;" />
   <img src="./images/ListadoRecetas.png" alt="Foto 6" width="46%" style="margin-bottom:10px;" />
+  <img src="./images/RecetasUsuario.png" alt="Foto 7" width="46%" style="margin-bottom:10px;" />
 </div>
 
