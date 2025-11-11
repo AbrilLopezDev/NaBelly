@@ -43,7 +43,7 @@ public class RecetaServiceImpl implements RecetaService{
     }
 
     @Override
-    public boolean eliminarReceta( Integer idReceta) {
+    public boolean EliminarReceta( Integer idReceta) {
         if(recetaRepository.existsById(idReceta)) {
             try {
                 recetaRepository.deleteById(idReceta);
@@ -64,13 +64,21 @@ public class RecetaServiceImpl implements RecetaService{
     }
 
     @Override
-    public boolean editarReceta(Receta receta) {
+    public boolean EditarReceta(Receta receta) {
         try {
             recetaRepository.save(receta);
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public RecetaDTO RecetaXId(Integer id) {
+        return recetaRepository.findById(id)
+                .map(this::mapToDTO)  // este map es de Optional<Receta>
+                .orElse(null);
+
     }
 
 

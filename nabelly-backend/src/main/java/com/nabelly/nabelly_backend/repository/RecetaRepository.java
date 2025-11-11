@@ -10,4 +10,5 @@ public interface RecetaRepository extends JpaRepository<Receta, Integer> {
     List<Receta> findByUsuario_Nombreusuario(String nombreusuario);
     // sin distinguir mayusculas o minusculas
     List<Receta> findByNombreContainingIgnoreCase(String nombre);
+
 }

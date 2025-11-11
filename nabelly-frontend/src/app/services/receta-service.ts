@@ -42,7 +42,10 @@ export class RecetaService {
       return this.http.get<Receta[]>(`${this.apiUrl}/nombre/${nombre}`);
     }
     editarReceta(receta: Receta): Observable<any> {
-      return this.http.delete(`${this.apiUrl}/edit/${receta}`);
+      return this.http.post(`${this.apiUrl}/edit`, receta);
+    }
+    getRecetaPorId( id: number ): Observable<Receta[]>{
+      return this.http.get<Receta[]>(`${this.apiUrl}/id/${id}`);
     }
 
 }

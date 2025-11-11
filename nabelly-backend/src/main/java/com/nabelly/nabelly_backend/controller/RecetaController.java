@@ -30,7 +30,7 @@ public class RecetaController {
 
     @DeleteMapping("/delete/{idReceta}")
     public ResponseEntity<Void> eliminarReceta (@PathVariable Integer idReceta) {
-        boolean eliminado = recetaService.eliminarReceta(idReceta);
+        boolean eliminado = recetaService.EliminarReceta(idReceta);
         if(eliminado){
             return ResponseEntity.ok().build(); // 200 OK
         } else {
@@ -44,15 +44,26 @@ public class RecetaController {
         return ResponseEntity.ok(recetas);
     }
 
-    @DeleteMapping("/edit/{Receta}")
+    @PostMapping("/edit/{Receta}")
     public ResponseEntity<Void> editarReceta (@PathVariable Receta receta) {
-        boolean editado = recetaService.editarReceta(receta);
+        boolean editado = recetaService.EditarReceta(receta);
         if(editado){
-            return ResponseEntity.ok().build(); 
+            return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity <RecetaDTO> RecetaXid (@PathVariable Integer id){
+        RecetaDTO receta = recetaService.RecetaXId(id);
+        if(receta == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(receta);
+    }
+
+
 
 
 
