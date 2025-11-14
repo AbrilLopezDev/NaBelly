@@ -1,0 +1,42 @@
+<div class="bg-light-yellow-custom flex flex-col  w-full">
+
+  <div class=" w-full md:w-[70%] p-6  mx-auto">
+
+    <div class="flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-red-custom">{{ receta?.nombre }}</h1>
+
+      <!-- Ícono corazón (sin funcionalidad aún) -->
+      <button class="text-3xl hover:scale-110 transition active:scale-95">
+        ❤️ {{ receta.favoritos || 0 }}
+      </button>
+    </div>
+
+    <div class="border-t-2 border-red-custom my-4"></div>
+
+   
+    <div class="flex items-center gap-4">
+     
+      <img 
+        [src]="usuarioAutor?.foto" 
+        alt="Autor" 
+        class="w-16 h-16 object-cover rounded-full border-red-custom"
+      />
+
+      <div class="flex flex-col">
+        <h3 class="font-semibold text-lg">@{{ usuarioAutor?.username }}</h3>
+        <p class="text-gray-700">{{ receta?.descripcion }}</p>
+      </div>
+    </div>
+
+    <!-- Foto Receta -->
+    <div class="mt-6">
+      <img 
+        [src]="receta?.foto" 
+        alt="Receta" 
+        class="rounded-xl w-full object-cover shadow-md"
+      />
+    </div>
+
+  </div>  
+
+</div>

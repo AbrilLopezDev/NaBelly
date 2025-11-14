@@ -19,6 +19,7 @@ public class RecetaController {
     @GetMapping("/categoria/{codCategoria}")
     public ResponseEntity<List<RecetaDTO>> RecetasXCategoria (@PathVariable String codCategoria){
         List<RecetaDTO> recetas = recetaService.RecetasXCategoria(codCategoria);
+        if(recetas == null){return ResponseEntity.notFound().build();}
         return ResponseEntity.ok(recetas);
     }
 

@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
 import {  HostListener, ElementRef } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-recetas',
-  imports: [CommonModule, NgIf],
+  imports: [CommonModule, NgIf, RouterLink],
   templateUrl: './usuario-recetas.html',
   styleUrl: './usuario-recetas.css' 
 })

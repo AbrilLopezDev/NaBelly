@@ -5,11 +5,12 @@ import { RecetaService } from '../../services/receta-service';
 import { Categoria } from '../../services/categoria-service';
 import { CategoriaService } from '../../services/categoria-service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-listado-categoria',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './usuario-listado-categoria.html',
   styleUrl: './usuario-listado-categoria.css'
   
