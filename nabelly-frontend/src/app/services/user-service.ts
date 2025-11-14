@@ -8,6 +8,11 @@ export interface Usuario {
   email: string;
   foto: string; 
 }
+export interface UsuarioPublico {
+
+  username: string;
+  foto: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -46,4 +51,8 @@ export class UserService {
     this.userSubject.next(null);
     sessionStorage.removeItem('usuario');
   }
+
+  getUserPorNombre(nombre: string): Observable<UsuarioPublico> {
+        return this.http.get<UsuarioPublico>(`${this.apiUrl}/username/${nombre}`);
+        }
 }

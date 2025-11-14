@@ -2,10 +2,15 @@ package com.nabelly.nabelly_backend.controller;
 import com.nabelly.nabelly_backend.entity.Usuario;
 import com.nabelly.nabelly_backend.security.JwtUtils;
 import com.nabelly.nabelly_backend.service.AuthService;
+import com.nabelly.nabelly_backend.service.UsuarioService;
+import dto.RecetaDTO;
 import dto.UserResponseDTO;
+import dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -45,6 +50,14 @@ public class UserController {
         response.setRole(usuario.isTipo() ? "ADMIN" : "USER");
 
         return ResponseEntity.ok(response);
+    }
+    @Autowired
+    UsuarioService usuarioService;
+
+    @GetMapping("/username/{nombre}")
+    public ResponseEntity<UsuarioDTO> UsuarioXNombre (@PathVariable String nombre){
+        UsuarioDTO usuario = usuarioService.usuarioXnombre(nombre);
+        return ResponseEntity.ok(usuario);
     }
 
 }
