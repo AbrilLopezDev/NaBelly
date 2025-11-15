@@ -1,29 +1,40 @@
 <div class="bg-light-yellow-custom flex flex-col  w-full">
 
-  <div class=" w-full md:w-[70%] p-6  mx-auto">
+  <div class=" w-full md:w-[60%] p-6  mx-auto">
 
     <div class="flex justify-between items-center">
       <h1 class="text-3xl font-bold text-red-custom">{{ receta?.nombre }}</h1>
 
       <!-- Ícono corazón (sin funcionalidad aún) -->
-      <button class="text-3xl hover:scale-110 transition active:scale-95">
-        ❤️ {{ receta.favoritos || 0 }}
+      <button class="flex items-center gap-1 hover:scale-110 transition active:scale-95 text-red-custom">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24" 
+          fill="currentColor" 
+          class="w-9 h-9">
+          <path d="M11.645 20.91c-.403-.228-1.04-.593-1.84-1.117a33.13 
+             33.13 0 01-3.582-2.705C4.42 15.072 3 12.878 3 10.25 3 
+             7.322 5.272 5 8.05 5c1.586 0 3.025.728 3.95 1.874A5.24 
+             5.24 0 0115.95 5C18.728 5 21 7.322 21 10.25c0 2.628-1.42 
+             4.822-3.223 6.838a33.13 33.13 0 01-3.582 2.705c-.8.524-1.437.89-1.84 
+             1.117-.317.18-.742.18-1.06 0z" />
+        </svg>
+        {{ receta.favoritos || 0 }}
       </button>
     </div>
 
-    <div class="border-t-2 border-red-custom my-4"></div>
+    <div class="border-t-2 border-red-custom my-4"></div> 
 
    
     <div class="flex items-center gap-4">
      
       <img 
-        [src]="usuarioAutor?.foto" 
+        [src]="usuarioAutor?.foto || 'assets/user.png'" 
         alt="Autor" 
-        class="w-16 h-16 object-cover rounded-full border-red-custom"
+        class="w-16 h-16 object-cover rounded-full border-2 border-red-custom"
       />
 
       <div class="flex flex-col">
-        <h3 class="font-semibold text-lg">@{{ usuarioAutor?.username }}</h3>
+        <h3 class="font-semibold text-lg">@{{ receta.autor }}</h3>
         <p class="text-gray-700">{{ receta?.descripcion }}</p>
       </div>
     </div>

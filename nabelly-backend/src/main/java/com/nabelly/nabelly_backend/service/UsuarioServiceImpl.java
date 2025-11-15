@@ -4,9 +4,11 @@ import com.nabelly.nabelly_backend.entity.Usuario;
 import com.nabelly.nabelly_backend.repository.UsuarioRepository;
 import dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired

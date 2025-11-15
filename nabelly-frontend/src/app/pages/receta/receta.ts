@@ -28,9 +28,11 @@ export class Receta implements OnInit{
     
     this.recetaService.getRecetaPorId(id).subscribe((data) => {
       this.receta = data;
-    });
-    this.userService.getUserPorNombre(this.receta.autor).subscribe(data => {
-      this.usuarioAutor = data;
+
+      
+      this.userService.getUserPorNombre(this.receta.autor).subscribe((usuario) => {
+        this.usuarioAutor = usuario;
+      });
     });
   }
 }
