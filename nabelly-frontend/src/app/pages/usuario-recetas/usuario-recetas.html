@@ -45,14 +45,14 @@
                 </div>
 
                 <div class="relative">
-                  <button (click)="toggleMenu(receta.idReceta)" class="text-gray-500 hover:text-gray-800 text-2xl font-bold">
+                  <button (click)="toggleMenu(receta.idReceta); $event.stopPropagation()" class="text-gray-500 hover:text-gray-800 text-2xl font-bold">
                     ⋮
                   </button>
 
                   <!-- Menú desplegable -->
                   <div *ngIf="receta.showMenu" class="absolute right-0 top-full mt-1 w-32 bg-yellow-custom border border-pink-custom rounded-md shadow z-50">
-                    <button (click)="editarReceta(receta)" class="block w-full text-left px-4 py-2 hover:bg-light-yellow-custom">Editar</button>
-                    <button (click)="solicitarEliminar(receta)" 
+                    <button (click)="editarReceta(receta); $event.stopPropagation()" class="block w-full text-left px-4 py-2 hover:bg-light-yellow-custom">Editar</button>
+                    <button (click)="solicitarEliminar(receta); $event.stopPropagation()"
                     class="block w-full text-left px-4 py-2 hover:bg-light-yellow-custom text-red-custom">Borrar</button>
                   </div>
                 </div>
