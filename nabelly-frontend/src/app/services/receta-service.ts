@@ -18,6 +18,7 @@ export interface Receta {
   foto: string;
   favoritos: number;
   showMenu?: boolean; 
+  //traer para las sugerencias tipo de la reeta, tipo y hora (cena, almuerzo)
 }
 
 @Injectable({

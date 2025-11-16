@@ -1,4 +1,4 @@
-<div class="bg-light-yellow-custom flex flex-col  w-full">
+<div class="bg-light-yellow-custom flex flex-col min-h-screen md:min-h-[calc(100vh-8rem)] w-full">
 
   <div class=" w-full md:w-[60%] p-6  mx-auto">
 
@@ -33,21 +33,65 @@
         class="w-16 h-16 object-cover rounded-full border-2 border-red-custom"
       />
 
-      <div class="flex flex-col">
+      <div class="flex flex-col md:text-l">
         <h3 class="font-semibold text-lg">@{{ receta.autor }}</h3>
-        <p class="text-gray-700">{{ receta?.descripcion }}</p>
+
+        <div class="text-sm text-gray-600 flex items-center gap-2">
+          <span>Publicado el {{ receta.hora | date:'dd/MM/yyyy' }}</span>
+          <span class="text-gray-500">•</span>
+          <span>{{ receta.porciones }} porciones</span>
+        </div>
+
+        <p class="text-gray-700 mt-1">{{ receta.descripcion }}</p>
       </div>
     </div>
 
-    <!-- Foto Receta -->
-    <div class="mt-6">
-      <img 
-        [src]="receta?.foto" 
-        alt="Receta" 
-        class="rounded-xl w-full object-cover shadow-md"
-      />
+    
+    <div class="flex items-center my-6 w-full">
+      <div class="flex-grow border-t border-red-custom"></div>
+        <span class="mx-3 text-red-custom font-semibold">Receta</span>
+      <div class="flex-grow border-t border-red-custom"></div>
+    </div>
+      
+
+
+     <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+
+      <!-- Ingredientes y Pasos -->
+      <div>
+        <h2 class="text-2xl font-bold text-red-custom mb-2">Ingredientes</h2>
+        <ul class="list-disc ml-6 text-gray-800">
+          <li *ngFor="let ing of ingredientesArray">{{ ing }}</li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-red-custom mt-6 mb-2">Pasos</h2>
+        <p class="text-gray-800 whitespace-pre-line">
+          {{ receta?.pasos }}
+        </p>
+      </div>
+
+      <!-- Foto Receta derecha -->
+      <div class="flex justify-center mt-6">
+        <img  
+          [src]="receta?.foto" 
+          alt="Receta" 
+          class="rounded-xl max-h-80 object-cover w-full shadow-md"
+        />
+      </div>
+
     </div>
 
-  </div>  
+    <!-- DARLE FUNCIONALIDAD Y VALORES REALES -->
+    <div class="mt-10 flex flex-wrap gap-2 justify-center mt-2 mb-2">
+      <span class="px-4 py-2 border border-red-custom text-red-custom rounded-full text-sm font-medium cursor-pointer hover:bg-yellow-custom transition">
+        Ver más ensaladas
+      </span>
+      <span class="px-4 py-2 border border-red-custom text-red-custom rounded-full text-sm font-medium cursor-pointer hover:bg-yellow-custom transition">
+        Ver más ideas de almuerzos y cenas
+      </span>
+    </div>
+
+
+  </div>
 
 </div>
