@@ -18,23 +18,15 @@
 
 # 📸 Algunas imágenes del proyecto
 
-<p align="center">
-  <img src="./images/Login.png" width="45%" style="border-radius:12px;">
-  <img src="./images/SignUp.png" width="45%" style="border-radius:12px;">
-</p>
-
-<p align="center">
-  <img src="./images/SignUp2.png" width="45%" style="border-radius:12px;">
-  <img src="./images/InicioNav.png" width="45%" style="border-radius:12px;">
-</p>
-
-<p align="center">
-  <img src="./images/MenuLateral.png" width="45%" style="border-radius:12px;">
-  <img src="./images/ListadoRecetas.png" width="45%" style="border-radius:12px;">
-</p>
-
-<p align="center">
-  <img src="./images/RecetasUsuario.png" width="45%" style="border-radius:12px;">
-  <img src="./images/Receta.png" width="45%" style="border-radius:12px;">
-</p>
+<div style="text-align: center;">
+  <img src="./images/Login.png" width="47%" style="margin-right:4%; margin-bottom:10px;" />
+  <img src="./images/SignUp.png" width="47%" style="margin-bottom:10px;" />
+  <img src="./images/SignUp2.png" width="47%" style="margin-bottom:10px;" />
+  <img src="./images/InicioNav.png" width="47%" style="margin-bottom:10px;" />
+  <img src="./images/MenuLateral.png" width="47%" style="margin-bottom:10px;" />
+  <img src="./images/ListadoRecetas.png" width="47%" style="margin-bottom:10px;" />
+  <img src="./images/Recetas.png" width="47%" style="margin-bottom:10px;" />
+  <img src="./images/RecetasUsuario.png" width="47%" style="margin-bottom:10px;" />
+  
+</div>
 
