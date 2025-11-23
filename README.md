@@ -20,8 +20,8 @@
 
 <div style="text-align: center;">
   <img src="./images/Login.png" width="47%" style="margin-right:4%; margin-bottom:10px;" />
-  <img src="./images/SignUp.png" width="47%" style="margin-bottom:10px;" />
-  <img src="./images/SignUp2.png" width="47%" style="margin-bottom:10px;" />
+  <img src="./images/registro.png" width="47%" style="margin-bottom:10px;" />
+  <img src="./images/registro2.png" width="47%" style="margin-bottom:10px;" />
   <img src="./images/InicioNav.png" width="47%" style="margin-bottom:10px;" />
   <img src="./images/MenuLateral.png" width="47%" style="margin-bottom:10px;" />
   <img src="./images/ListadoRecetas.png" width="47%" style="margin-bottom:10px;" />
