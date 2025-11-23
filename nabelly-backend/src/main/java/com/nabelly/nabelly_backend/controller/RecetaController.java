@@ -56,13 +56,15 @@ public class RecetaController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity <RecetaDTO> RecetaXid (@PathVariable Integer id){
-        RecetaDTO receta = recetaService.RecetaXId(id);
+    public ResponseEntity <RecetaDTO> RecetaDTOXid (@PathVariable Integer id){
+        RecetaDTO receta = recetaService.RecetaDTOXId(id);
         if(receta == null){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(receta);
     }
+
+
 
 
 

@@ -11,5 +11,6 @@ public interface RecetaService {
     boolean EliminarReceta(Integer idReceta);
     List<RecetaDTO> RecetasXNombre(String Nombre);
     boolean EditarReceta(Receta receta);
-    RecetaDTO RecetaXId (Integer id);
+    RecetaDTO RecetaDTOXId (Integer id);
+    Receta RecetaXId (Integer id);
 }

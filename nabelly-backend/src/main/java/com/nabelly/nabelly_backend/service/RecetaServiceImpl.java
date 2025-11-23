@@ -1,12 +1,14 @@
 package com.nabelly.nabelly_backend.service;
 
 import com.nabelly.nabelly_backend.entity.Receta;
+import com.nabelly.nabelly_backend.entity.Usuario;
 import com.nabelly.nabelly_backend.repository.RecetaRepository;
 import dto.RecetaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecetaServiceImpl implements RecetaService{
@@ -25,7 +27,6 @@ public class RecetaServiceImpl implements RecetaService{
         dto.setCategoria(receta.getCategoria().getNombre());
         dto.setHora(receta.getHora());
         dto.setFoto(receta.getFoto());
-        dto.setFavoritos(receta.getFavoritos());
         dto.setAutor(receta.getUsuario().getNombreusuario());
         return dto;
     }
@@ -74,12 +75,23 @@ public class RecetaServiceImpl implements RecetaService{
     }
 
     @Override
-    public RecetaDTO RecetaXId(Integer id) {
+    public RecetaDTO RecetaDTOXId(Integer id) {
         return recetaRepository.findById(id)
                 .map(this::mapToDTO)  // este map es de Optional<Receta>
                 .orElse(null);
 
     }
+
+    @Override
+    public Receta RecetaXId(Integer id) {
+        Optional<Receta> optionalReceta = recetaRepository.findById(id);
+        if (optionalReceta.isEmpty()) {
+            return null;
+        }
+        return optionalReceta.get();
+
+    }
+
 
 
 }

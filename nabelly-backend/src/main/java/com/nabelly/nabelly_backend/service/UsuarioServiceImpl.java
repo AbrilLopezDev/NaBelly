@@ -15,7 +15,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     UsuarioRepository usuarioRepository;
 
     @Override
-    public UsuarioDTO usuarioXnombre(String nombreusuario) {
+    public UsuarioDTO usuarioDTOXnombre(String nombreusuario) {
         Optional<Usuario> optionalUsuario = usuarioRepository.findBynombreusuario(nombreusuario);
 
         if (optionalUsuario.isEmpty()) {
@@ -30,4 +30,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         return dto;
     }
+
+    @Override
+    public Usuario usuarioXnombre(String nombreusuario) {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findBynombreusuario(nombreusuario);
+        if (optionalUsuario.isEmpty()) {
+            return null;
+        }
+        return optionalUsuario.get();
+    }
+
+
 }

@@ -11,7 +11,6 @@ public class RecetaDTO {
     private String categoria;
     private LocalDateTime hora;
     private String foto;
-    private int favoritos;
     private String autor;
 
     public Integer getIdReceta() {
@@ -86,13 +85,6 @@ public class RecetaDTO {
         this.foto = foto;
     }
 
-    public int getFavoritos() {
-        return favoritos;
-    }
-
-    public void setFavoritos(int favoritos) {
-        this.favoritos = favoritos;
-    }
 
     public String getAutor() {
         return autor;

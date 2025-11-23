@@ -56,7 +56,7 @@ public class UserController {
 
     @GetMapping("/username/{nombre}")
     public ResponseEntity<UsuarioDTO> UsuarioXNombre (@PathVariable String nombre){
-        UsuarioDTO usuario = usuarioService.usuarioXnombre(nombre);
+        UsuarioDTO usuario = usuarioService.usuarioDTOXnombre(nombre);
         return ResponseEntity.ok(usuario);
     }
 

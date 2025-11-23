@@ -41,10 +41,6 @@ public class Receta {
     @Column(name = "foto", length = 500)
     private String foto;
 
-    @Column(name = "favoritos", length = 30)
-    private int favoritos;
-
-
     // Getters y Setters
 
     public Integer getIdReceta() {
@@ -127,11 +123,4 @@ public class Receta {
         this.foto = foto;
     }
 
-    public int getFavoritos() {
-        return favoritos;
-    }
-
-    public void setFavoritos(int favoritos) {
-        this.favoritos = favoritos;
-    }
 }

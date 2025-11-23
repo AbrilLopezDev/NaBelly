@@ -16,7 +16,6 @@ export interface Receta {
   categoria: string;
   hora: string;          
   foto: string;
-  favoritos: number;
   showMenu?: boolean; 
   //traer para las sugerencias tipo de la reeta, tipo y hora (cena, almuerzo)
 }
@@ -48,6 +47,8 @@ export class RecetaService {
     getRecetaPorId( id: number ): Observable<Receta[]>{
       return this.http.get<Receta[]>(`${this.apiUrl}/id/${id}`);
     }
+    
+
 
 }
   

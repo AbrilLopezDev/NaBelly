@@ -19,12 +19,15 @@ export class Receta implements OnInit{
   usuarioAutor: UsuarioPublico | null = null;
   ingredientesArray: string[] = [];
   pasosArray: string[] = [];
+  favoritos = 0; //cambiar
 
   constructor(
     private route: ActivatedRoute,
     private recetaService: RecetaService,
     private userService: UserService
   ) {}
+
+  //ver cuantos favoritos tiene la receta y si el usuario que la esta viendo le dió o no favorito, al dar o sacar favorito, actualizar numero
 
   ngOnInit(): void {
     // tomar el id
