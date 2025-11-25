@@ -18,4 +18,22 @@
 
 # 📸 Algunas imágenes del proyecto
 
+<p align="center">
+  <img src="images/listado.png" width="45%" />
+  <img src="images/login.png" width="45%" />
+</p>
 
+<p align="center">
+  <img src="images/menu.png" width="45%" />
+  <img src="images/navbar.png" width="45%" />
+</p>
+
+<p align="center">
+  <img src="images/receta.png" width="45%" />
+  <img src="images/recetasusuario.png" width="45%" />
+</p>
+
+<p align="center">
+  <img src="images/registro.png" width="45%" />
+  <img src="images/registrofoto.png" width="45%" />
+</p>
