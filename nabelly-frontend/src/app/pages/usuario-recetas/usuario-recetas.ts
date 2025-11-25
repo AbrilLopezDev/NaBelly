@@ -6,6 +6,7 @@ import { OnInit } from '@angular/core';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
 import {  HostListener, ElementRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FavoritoService } from '../../services/favorito-service';
 
 @Component({
   selector: 'app-usuario-recetas',
@@ -22,11 +23,13 @@ export class UsuarioRecetas implements OnInit {
   itemsPerPage: number = 8;
   recetaAEliminar: Receta | null = null;
   confirmarEliminarModal = false;
+  favoritosCount: { [id: number]: number } = {};
 
   constructor(
     private router: Router,
     private recetaService: RecetaService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private favoritoService: FavoritoService
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +51,12 @@ export class UsuarioRecetas implements OnInit {
         if (this.recetas.length === 0) {
           this.mensaje = 'No has publicado recetas aún :(';
         }
+        this.recetas.forEach(receta => {
+          this.favoritoService.getFavoritosReceta(receta.idReceta).subscribe({
+            next: (cantidad) => this.favoritosCount[receta.idReceta] = cantidad,
+            error: () => this.favoritosCount[receta.idReceta] = 0
+          });
+        });
       },
       error: (err) => {
         console.error('Error al obtener recetas:', err);

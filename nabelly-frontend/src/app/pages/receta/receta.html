@@ -6,7 +6,8 @@
       <h1 class="text-3xl font-bold text-red-custom">{{ receta?.nombre }}</h1>
 
       <!-- Ícono corazón (sin funcionalidad aún) -->
-      <button class="flex items-center gap-1 hover:scale-110 transition active:scale-95 text-red-custom">
+      <button class="flex items-center gap-1 hover:scale-110 transition active:scale-95 text-red-custom"
+      (click)="toggleFavorito()">
         <svg xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 24 24" 
           fill="currentColor" 
@@ -18,7 +19,7 @@
              4.822-3.223 6.838a33.13 33.13 0 01-3.582 2.705c-.8.524-1.437.89-1.84 
              1.117-.317.18-.742.18-1.06 0z" />
         </svg>
-        {{ favoritos || 0 }}
+        <span>{{ favoritos }}</span>
       </button>
     </div>
 

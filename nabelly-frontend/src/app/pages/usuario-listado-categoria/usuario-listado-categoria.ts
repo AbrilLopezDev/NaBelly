@@ -6,6 +6,7 @@ import { Categoria } from '../../services/categoria-service';
 import { CategoriaService } from '../../services/categoria-service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FavoritoService } from '../../services/favorito-service';
 
 @Component({
   selector: 'app-usuario-listado-categoria',
@@ -22,16 +23,19 @@ export class UsuarioListadoCategoria implements OnInit{
   cantidadRecetas: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 8;
+  favoritosCount: { [id: number]: number } = {};
+  
 
   constructor(
     private route: ActivatedRoute,
     private recetaService: RecetaService,
-    private categoriaService: CategoriaService 
+    private categoriaService: CategoriaService,
+    private favoritoService: FavoritoService
   ) {}
 
   ngOnInit(): void {
     // Obtener parametro de la URL
-     this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(params => {
     this.codCategoria = params.get('codCategoria');
 
     if (this.codCategoria) {
@@ -40,6 +44,12 @@ export class UsuarioListadoCategoria implements OnInit{
         data => {
           this.recetas = data;
           this.cantidadRecetas = this.recetas.length;
+          this.recetas.forEach(receta => {
+            this.favoritoService.getFavoritosReceta(receta.idReceta).subscribe({
+              next: (cantidad) => this.favoritosCount[receta.idReceta] = cantidad,
+              error: () => this.favoritosCount[receta.idReceta] = 0
+            });
+          });
         },
         err => {
           console.error('Error al cargar recetas', err);
