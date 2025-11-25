@@ -25,7 +25,7 @@ public class FavoritoServiceImpl implements FavoritoService {
 
     @Override
     public boolean existeFavorito(int idReceta, String usuario) {
-        Optional<Favorito> existente = favoritoRepository.findByUsuarioIdAndRecetaId(idReceta, usuario);
+        Optional<Favorito> existente = favoritoRepository.findByIdNombreUsuarioAndIdIdReceta(usuario, idReceta);
 
         if (existente.isPresent()) {
             return true;
@@ -36,21 +36,22 @@ public class FavoritoServiceImpl implements FavoritoService {
 
     @Override
     public boolean toggleFavorito(int idReceta, String usuario) {
-        Optional<Favorito> existente = favoritoRepository.findByUsuarioIdAndRecetaId(idReceta, usuario);
         try {
+            Optional<Favorito> existente = favoritoRepository.findByIdNombreUsuarioAndIdIdReceta(usuario, idReceta);
+            System.out.println("toggleFavorito -> existente present? " + existente.isPresent());
             if (existente.isPresent()) {
-                favoritoRepository.deleteByUsuarioIdAndRecetaId(idReceta, usuario);
+                favoritoRepository.delete(existente.get());   // borrar la entidad
                 return true;
             } else {
                 Favorito f = new Favorito();
                 f.setUsuario(usuarioService.usuarioXnombre(usuario));
                 f.setReceta(recetaService.RecetaXId(idReceta));
-                FavoritoId fi = new FavoritoId(idReceta, usuario);
-                f.setId(fi);
+                f.setId(new FavoritoId(idReceta, usuario));
                 favoritoRepository.save(f);
                 return true;
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
