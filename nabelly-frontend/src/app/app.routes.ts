@@ -8,6 +8,7 @@ import { AuthRecovery } from './pages/auth-recovery/auth-recovery';
 import { UsuarioListadoCategoria } from './pages/usuario-listado-categoria/usuario-listado-categoria';
 import { UsuarioRecetas } from './pages/usuario-recetas/usuario-recetas';
 import { Receta } from './pages/receta/receta';
+import { UsuarioRecetaForm } from './pages/usuario-receta-form/usuario-receta-form';
 
 export const routes: Routes = [
   {
@@ -27,7 +28,8 @@ export const routes: Routes = [
       { path: 'inicio', component: UsuarioInicio },
       { path: 'usuario-listado-categoria/:codCategoria', component: UsuarioListadoCategoria },
       { path: 'usuario-recetas', component: UsuarioRecetas},  
-      { path: 'receta/:id', component: Receta}
+      { path: 'receta/:id', component: Receta},
+      { path: 'usuario-receta-form/:idReceta', component: UsuarioRecetaForm}
     ]
   }
 ];

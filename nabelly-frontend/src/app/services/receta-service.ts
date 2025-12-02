@@ -47,7 +47,13 @@ export class RecetaService {
     getRecetaPorId( id: number ): Observable<Receta[]>{
       return this.http.get<Receta[]>(`${this.apiUrl}/id/${id}`);
     }
-    
+    crearReceta(form: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}/create`, form);
+    }
+
+    actualizarReceta(id: number, form: any): Observable<any> {
+      return this.http.put(`${this.apiUrl}/update/${id}`, form);
+    }
 
 
 }
