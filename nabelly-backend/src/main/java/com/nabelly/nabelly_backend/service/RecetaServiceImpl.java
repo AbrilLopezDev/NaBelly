@@ -1,5 +1,6 @@
 package com.nabelly.nabelly_backend.service;
 
+import com.nabelly.nabelly_backend.entity.Categoria;
 import com.nabelly.nabelly_backend.entity.Receta;
 import com.nabelly.nabelly_backend.entity.Usuario;
 import com.nabelly.nabelly_backend.repository.RecetaRepository;
@@ -29,6 +30,29 @@ public class RecetaServiceImpl implements RecetaService{
         dto.setFoto(receta.getFoto());
         dto.setAutor(receta.getUsuario().getNombreusuario());
         return dto;
+    }
+
+    private Receta mapToEntity(RecetaDTO dto) {
+        Receta receta = new Receta();
+        receta.setIdReceta(dto.getIdReceta());
+        receta.setNombre(dto.getNombre());
+        receta.setDescripcion(dto.getDescripcion());
+        receta.setPasos(dto.getPasos());
+        receta.setIngredientes(dto.getIngredientes());
+        receta.setPorciones(dto.getPorciones());
+        receta.setHora(dto.getHora());
+        receta.setFoto(dto.getFoto());
+
+        // Categoria y Usuario cargados
+        Categoria categoria = new Categoria();
+        categoria.setNombre(dto.getCategoria());
+        receta.setCategoria(categoria);
+
+        Usuario usuario = new Usuario();
+        usuario.setNombreusuario(dto.getAutor());
+        receta.setUsuario(usuario);
+
+        return receta;
     }
 
     @Override
@@ -65,16 +89,6 @@ public class RecetaServiceImpl implements RecetaService{
     }
 
     @Override
-    public boolean EditarReceta(Receta receta) {
-        try {
-            recetaRepository.save(receta);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    @Override
     public RecetaDTO RecetaDTOXId(Integer id) {
         return recetaRepository.findById(id)
                 .map(this::mapToDTO)  // este map es de Optional<Receta>
@@ -90,6 +104,35 @@ public class RecetaServiceImpl implements RecetaService{
         }
         return optionalReceta.get();
 
+    }
+
+    @Override
+    public RecetaDTO crearReceta(RecetaDTO dto) {
+        Receta receta = mapToEntity(dto);
+        Receta guardada = recetaRepository.save(receta);
+        return mapToDTO(guardada);
+    }
+
+    @Override
+    public RecetaDTO actualizarReceta(Integer id, RecetaDTO dto) {
+        Optional<Receta> optional = recetaRepository.findById(id);
+        if (optional.isEmpty()) return null;
+
+        Receta existente = optional.get();
+
+        existente.setNombre(dto.getNombre());
+        existente.setDescripcion(dto.getDescripcion());
+        existente.setPasos(dto.getPasos());
+        existente.setIngredientes(dto.getIngredientes());
+        existente.setPorciones(dto.getPorciones());
+        existente.setHora(dto.getHora());
+        existente.setFoto(dto.getFoto());
+
+        existente.getCategoria().setNombre(dto.getCategoria());
+        existente.getUsuario().setNombreusuario(dto.getAutor());
+
+        Receta actualizada = recetaRepository.save(existente);
+        return mapToDTO(actualizada);
     }
 
 

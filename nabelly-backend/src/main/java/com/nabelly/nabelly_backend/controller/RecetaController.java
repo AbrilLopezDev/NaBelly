@@ -45,15 +45,7 @@ public class RecetaController {
         return ResponseEntity.ok(recetas);
     }
 
-    @PostMapping("/edit/{Receta}")
-    public ResponseEntity<Void> editarReceta (@PathVariable Receta receta) {
-        boolean editado = recetaService.EditarReceta(receta);
-        if(editado){
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+
 
     @GetMapping("/id/{id}")
     public ResponseEntity <RecetaDTO> RecetaDTOXid (@PathVariable Integer id){
@@ -64,6 +56,25 @@ public class RecetaController {
         return ResponseEntity.ok(receta);
     }
 
+    @PostMapping
+    public ResponseEntity<RecetaDTO> crear(@RequestBody RecetaDTO dto) {
+        RecetaDTO creada = recetaService.crearReceta(dto);
+        return ResponseEntity.ok(creada);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RecetaDTO> actualizar(
+            @PathVariable Integer id,
+            @RequestBody RecetaDTO dto) {
+
+        RecetaDTO actualizada = recetaService.actualizarReceta(id, dto);
+
+        if (actualizada == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(actualizada);
+    }
 
 
 
