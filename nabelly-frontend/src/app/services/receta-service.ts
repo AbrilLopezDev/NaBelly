@@ -17,7 +17,7 @@ export interface Receta {
   hora: string;          
   foto: string;
   showMenu?: boolean; 
-  //traer para las sugerencias tipo de la reeta, tipo y hora (cena, almuerzo)
+
 }
 
 @Injectable({
@@ -44,8 +44,8 @@ export class RecetaService {
     editarReceta(receta: Receta): Observable<any> {
       return this.http.post(`${this.apiUrl}/edit`, receta);
     }
-    getRecetaPorId( id: number ): Observable<Receta[]>{
-      return this.http.get<Receta[]>(`${this.apiUrl}/id/${id}`);
+    getRecetaPorId( id: number ): Observable<Receta>{
+      return this.http.get<Receta>(`${this.apiUrl}/id/${id}`);
     }
     crearReceta(form: any): Observable<any> {
       return this.http.post(`${this.apiUrl}/create`, form);

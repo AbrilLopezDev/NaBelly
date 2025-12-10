@@ -92,9 +92,8 @@ export class UsuarioRecetas implements OnInit {
   });
 }
 
-editarReceta(receta: any) {
-  console.log('Editar receta:', receta);
-  
+editarReceta(receta: Receta) {
+  this.router.navigate(['/usuario-receta-form', receta.idReceta]);
 }
 
 solicitarEliminar(receta: Receta) {

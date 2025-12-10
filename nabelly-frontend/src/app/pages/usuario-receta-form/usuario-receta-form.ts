@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecetaService } from '../../services/receta-service';
-import { FormsModule } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { NgIf } from '@angular/common';
-
+import { NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-usuario-receta-form',
-  imports: [FormsModule, NgIf],
   templateUrl: './usuario-receta-form.html',
-  styleUrl: './usuario-receta-form.css'
+  standalone: true,
+  imports:[CommonModule, NgFor, NgIf, FormsModule],
 })
 export class UsuarioRecetaForm implements OnInit{
-  id: number | null = null;
-  esEdicion = false;
+ esEdicion = false;
+  idReceta!: number;
 
   form = {
     nombre: '',
@@ -32,45 +34,39 @@ export class UsuarioRecetaForm implements OnInit{
   ) {}
 
   ngOnInit() {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    this.id = idParam ? Number(idParam) : null;
+    const id = this.route.snapshot.paramMap.get('idReceta');
 
-    if (this.id) {
+    if (id) {
       this.esEdicion = true;
-      this.cargarReceta();
+      this.idReceta = +id;
+
+      this.recetaService.getRecetaPorId(this.idReceta)
+        .subscribe(r => {
+          console.log("RECETA RECIBIDA:", r);
+          this.form = {
+            nombre: r.nombre || '',
+            descripcion: r.descripcion || '',
+            ingredientes: r.ingredientes || '',
+            pasos: r.pasos || '',
+            porciones: r.porciones || 0,
+            categoria: r.categoria || '',
+            foto: r.foto || ''
+          };
+        });
     }
   }
-
-  cargarReceta() {
-  this.recetaService.getRecetaPorId(Number(this.id)).subscribe(recetas => {
-    
-    // la primera receta
-    const receta = recetas[0];
-
-    if (!receta) return; // por si viene vacío
-
-    this.form = {
-      nombre: receta.nombre,
-      descripcion: receta.descripcion,
-      ingredientes: receta.ingredientes,
-      pasos: receta.pasos,
-      porciones: receta.porciones,
-      categoria: receta.categoria,
-      foto: receta.foto
-    };
-  });
-}
 
   guardar() {
     if (this.esEdicion) {
-      this.recetaService.actualizarReceta(this.id!, this.form).subscribe(() => {
-        this.router.navigate(['/mi-receta', this.id]);
-      });
+      this.recetaService.actualizarReceta(this.idReceta, this.form)
+        .subscribe(() => {
+          this.router.navigate(['/usuario/lista']);
+        });
     } else {
-      this.recetaService.crearReceta(this.form).subscribe((nueva: any) => {
-        this.router.navigate(['/mi-receta', nueva.id]);
-      });
+      this.recetaService.crearReceta(this.form)
+        .subscribe(() => {
+          this.router.navigate(['/usuario/lista']);
+        });
     }
   }
-
 }
