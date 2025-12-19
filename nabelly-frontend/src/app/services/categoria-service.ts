@@ -26,7 +26,11 @@ export class CategoriaService {
       return this.http.get<Categoria>(`${this.apiUrl}/codigo/${codCategoria}`)
     }
     
-
+    //Para mostrar al final de la receta y para el select al actualizar receta
+    //buscar categoria de receta
+    getCategoriaReceta( id: number ): Observable<Categoria>{
+      return this.http.get<Categoria>(`${this.apiUrl}/receta/${id}`);
+    }
 
 }
   

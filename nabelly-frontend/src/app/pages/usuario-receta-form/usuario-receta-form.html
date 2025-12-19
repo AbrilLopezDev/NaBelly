@@ -10,6 +10,22 @@
     <form (ngSubmit)="guardar()" class="flex flex-col gap-6">
 
       <div>
+        <label class="font-semibold text-red-custom">Foto (URL)</label>
+        <input
+          type="text"
+          [(ngModel)]="form.foto"
+          name="foto"
+          class="w-full p-3 rounded-lg border border-red-custom"
+        />
+      </div>
+      <div *ngIf="form.foto" class="flex justify-center mt-4">
+        <img
+          [src]="form.foto"
+          class="rounded-xl max-h-60 shadow-md object-cover"
+        />
+      </div>
+
+      <div>
         <label class="font-semibold text-red-custom">Nombre</label>
         <input
           type="text"
@@ -70,22 +86,9 @@
         />
       </div>
 
-      <div>
-        <label class="font-semibold text-red-custom">Foto (URL)</label>
-        <input
-          type="text"
-          [(ngModel)]="form.foto"
-          name="foto"
-          class="w-full p-3 rounded-lg border border-red-custom"
-        />
-      </div>
+      
 
-      <div *ngIf="form.foto" class="flex justify-center mt-4">
-        <img
-          [src]="form.foto"
-          class="rounded-xl max-h-60 shadow-md object-cover"
-        />
-      </div>
+      
 
       <button
         type="submit"

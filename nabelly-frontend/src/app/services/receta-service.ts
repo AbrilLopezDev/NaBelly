@@ -54,7 +54,8 @@ export class RecetaService {
     actualizarReceta(id: number, form: any): Observable<any> {
       return this.http.put(`${this.apiUrl}/update/${id}`, form);
     }
-
+    
+    
 
 }
   
